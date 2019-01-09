@@ -25,7 +25,7 @@ import BasicDetail from '@/pages/detail/BasicDetail'
 import AdvancedDetail from '@/pages/detail/AdvancedDetail'
 import TaskCard from '@/pages/components/TaskCard'
 import ColorBox from '@/pages/components/Palette'
-import Music from '@/pages/music/Music'
+import MusicList from '@/pages/music/MusicList'
 
 Vue.use(Router)
 
@@ -51,40 +51,40 @@ export default new Router({
         //   component: Music,
         //   icon: 'dashboard'
         // },
-        {
-          path: '/dashboard',
-          name: 'dashboard',
-          component: RouteView,
-          icon: 'dashboard',
-          children: [
-            {
-              path: '/dashboard/workplace',
-              name: '工作台',
-              component: WorkPlace,
-              icon: 'none'
-            },
-            {
-              path: '/dashboard/analysis',
-              name: '分析页',
-              component: Dashboard,
-              icon: 'none'
-            }
-          ]
-        },
         // {
-        //   path: '/music',
-        //   name: '音乐',
+        //   path: '/dashboard',
+        //   name: 'dashboard',
         //   component: RouteView,
         //   icon: 'dashboard',
         //   children: [
         //     {
-        //       path: '/music/music',
-        //       name: '我的音乐',
-        //       component: Music,
+        //       path: '/dashboard/workplace',
+        //       name: '工作台',
+        //       component: WorkPlace,
+        //       icon: 'none'
+        //     },
+        //     {
+        //       path: '/dashboard/analysis',
+        //       name: '分析页',
+        //       component: Dashboard,
         //       icon: 'none'
         //     }
         //   ]
         // },
+        {
+          path: '/music',
+          name: '音乐',
+          component: RouteView,
+          icon: 'dashboard',
+          children: [
+            {
+              path: '/music/musicList',
+              name: '我的音乐',
+              component: MusicList,
+              icon: 'none'
+            }
+          ]
+        },
         {
           path: '/form',
           name: '表单页',

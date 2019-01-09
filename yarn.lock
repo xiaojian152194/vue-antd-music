@@ -192,6 +192,13 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@moefe/vue-aplayer@^2.0.0-beta.5":
+  version "2.0.0-beta.5"
+  resolved "http://registry.npm.taobao.org/@moefe/vue-aplayer/download/@moefe/vue-aplayer-2.0.0-beta.5.tgz#f6bbd1802562e8e30ef9106192008a90bed2a354"
+  integrity sha1-9rvRgCVi6OMO+RBhkgCKkL7So1Q=
+  dependencies:
+    vue "^2.5.17"
+
 "@types/d3-format@*":
   version "1.3.0"
   resolved "http://registry.npm.taobao.org/@types/d3-format/download/@types/d3-format-1.3.0.tgz#c5e115fac8e6861ce656fe9861892b22f6b0cfcb"

@@ -1,20 +1,36 @@
 <template>
   <div>
-    <aplayer :list="[]"
-             :music="{
-              title: '第三人称（Cover Hush！）',
-              artist: '买辣椒也用券',
-              src: 'http://music.163.com/song/media/outer/url?id=502043537.mp3',
-              pic: 'https://p1.music.126.net/gZ4VUKzlS5Nk1DTmlicb7w==/109951163013152269.jpg?param=34y34'
-              }"
-    />
+    <aplayer :audio="audio" :lrcType="3" :mini="false" fixed/>
+    <!--<aplayer :list="[]"-->
+             <!--:music="{-->
+              <!--title: '第三人称（Cover Hush！）',-->
+              <!--artist: '买辣椒也用券',-->
+              <!--src: 'http://music.163.com/song/media/outer/url?id=502043537',-->
+              <!--pic: 'https://p1.music.126.net/gZ4VUKzlS5Nk1DTmlicb7w==/109951163013152269.jpg?param=34y34'-->
+              <!--}"-->
+    <!--/>-->
   </div>
 </template>
 
 <script>
-import Aplayer from 'vue-aplayer'
+import Vue from 'vue'
+import APlayer from '@moefe/vue-aplayer'
+Vue.use(APlayer)
 export default {
   name: 'MusicPlayer',
-  components: {Aplayer}
+  // components: { APlayer },
+  data () {
+    return {
+      audio: [
+        {
+          name: '东西（Cover：林俊呈）',
+          artist: '纳豆',
+          url: 'https://cdn.moefe.org/music/mp3/thing.mp3',
+          cover: 'https://p1.music.126.net/5zs7IvmLv7KahY3BFzUmrg==/109951163635241613.jpg?param=300y300', // prettier-ignore
+          lrc: 'https://cdn.moefe.org/music/lrc/thing.lrc'
+        }
+      ]
+    }
+  }
 }
 </script>

@@ -6,18 +6,18 @@
         <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
       </img-checkbox-group>
     </setting-item>
-    <setting-item title="主题色">
-      <color-checkbox-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
-        <color-checkbox ref="colorNode" color="rgb(245, 34, 45)" value="1" />
-        <color-checkbox color="rgb(250, 84, 28)" value="2" />
-        <color-checkbox color="rgb(250, 173, 20)" value="3" />
-        <color-checkbox color="rgb(19, 194, 194)" value="4" />
-        <color-checkbox color="rgb(82, 196, 26)" value="5" />
-        <color-checkbox color="rgb(24, 144, 255)" value="6" />
-        <color-checkbox color="rgb(47, 84, 235)" value="7" />
-        <color-checkbox color="rgb(114, 46, 209)" value="8" />
-      </color-checkbox-group>
-    </setting-item>
+    <!--<setting-item title="主题色">-->
+      <!--<color-checkbox-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">-->
+        <!--<color-checkbox ref="colorNode" color="rgb(245, 34, 45)" value="1" />-->
+        <!--<color-checkbox color="rgb(250, 84, 28)" value="2" />-->
+        <!--<color-checkbox color="rgb(250, 173, 20)" value="3" />-->
+        <!--<color-checkbox color="rgb(19, 194, 194)" value="4" />-->
+        <!--<color-checkbox color="rgb(82, 196, 26)" value="5" />-->
+        <!--<color-checkbox color="rgb(24, 144, 255)" value="6" />-->
+        <!--<color-checkbox color="rgb(47, 84, 235)" value="7" />-->
+        <!--<color-checkbox color="rgb(114, 46, 209)" value="8" />-->
+      <!--</color-checkbox-group>-->
+    <!--</setting-item>-->
     <a-divider/>
     <setting-item title="导航设置">
       <img-checkbox-group @change="setLayout">
@@ -25,44 +25,44 @@
         <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
     </setting-item>
-    <setting-item>
-      <a-list :split="false">
-        <a-list-item>
-          栅格模式
-          <a-select size="small" defaultValue="1" slot="actions" style="width: 80px">
-            <a-select-option value="1">流式</a-select-option>
-            <a-select-option value="2">定宽</a-select-option>
-          </a-select>
-        </a-list-item>
-        <a-list-item>
-          固定Header
-          <a-switch slot="actions" size="small" />
-        </a-list-item>
-        <a-list-item>
-          固定Siderbar
-          <a-switch slot="actions" size="small" />
-        </a-list-item>
-      </a-list>
-    </setting-item>
-    <a-divider />
-    <setting-item title="其他设置">
-      <a-list :split="false">
-        <a-list-item>
-          色弱模式
-          <a-switch slot="actions" size="small" />
-        </a-list-item>
-        <a-list-item>
-          显示抽屉按钮
-          <a-switch slot="actions" size="small" />
-        </a-list-item>
-        <a-list-item>
-          多页签模式
-          <a-switch :checked="multipage" slot="actions" size="small" @change="setMultipage" />
-        </a-list-item>
-      </a-list>
-    </setting-item>
-    <a-divider />
-    <a-button id="copyBtn" data-clipboard-text="Sorry, you copy nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
+    <!--<setting-item>-->
+      <!--<a-list :split="false">-->
+        <!--<a-list-item>-->
+          <!--栅格模式-->
+          <!--<a-select size="small" defaultValue="1" slot="actions" style="width: 80px">-->
+            <!--<a-select-option value="1">流式</a-select-option>-->
+            <!--<a-select-option value="2">定宽</a-select-option>-->
+          <!--</a-select>-->
+        <!--</a-list-item>-->
+        <!--<a-list-item>-->
+          <!--固定Header-->
+          <!--<a-switch slot="actions" size="small" />-->
+        <!--</a-list-item>-->
+        <!--<a-list-item>-->
+          <!--固定Siderbar-->
+          <!--<a-switch slot="actions" size="small" />-->
+        <!--</a-list-item>-->
+      <!--</a-list>-->
+    <!--</setting-item>-->
+    <!--<a-divider />-->
+    <!--<setting-item title="其他设置">-->
+      <!--<a-list :split="false">-->
+        <!--<a-list-item>-->
+          <!--色弱模式-->
+          <!--<a-switch slot="actions" size="small" />-->
+        <!--</a-list-item>-->
+        <!--<a-list-item>-->
+          <!--显示抽屉按钮-->
+          <!--<a-switch slot="actions" size="small" />-->
+        <!--</a-list-item>-->
+        <!--<a-list-item>-->
+          <!--多页签模式-->
+          <!--<a-switch :checked="multipage" slot="actions" size="small" @change="setMultipage" />-->
+        <!--</a-list-item>-->
+      <!--</a-list>-->
+    <!--</setting-item>-->
+    <!--<a-divider />-->
+    <!--<a-button id="copyBtn" data-clipboard-text="Sorry, you copy nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>-->
   </a-layout-sider>
 </template>
 

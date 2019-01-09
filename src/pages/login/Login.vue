@@ -6,7 +6,7 @@
           <img alt="logo" class="logo" src="static/img/logo2.png" />
           <span class="title">{{systemName}}</span>
         </div>
-        <div class="desc">一个简单的音乐后台管理系统</div>
+        <div class="desc">个人云音乐中心</div>
       </div>
       <div class="login">
         <a-form @submit="onSubmit" :autoFormCreate="(form) => this.form = form">
@@ -111,7 +111,7 @@ export default {
             const result = res.data
             if (result.code >= 0) {
               const user = result.data.user
-              this.$router.push('/music/music')
+              this.$router.push('/music/musicList')
               this.$store.commit('account/setuser', user)
               this.$message.success(result.message, 3)
             } else {

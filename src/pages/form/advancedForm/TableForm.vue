@@ -16,29 +16,6 @@
           />
           <template v-else>{{text}}</template>
       </template>
-      <template slot="operation" slot-scope="text, record, index">
-        <template v-if="record.editable">
-          <span v-if="record.isNew">
-            <a @click="saveRow(record.key)">添加</a>
-            <a-divider type="vertical" />
-            <a-popconfirm title="是否要删除此音乐？" @confirm="remove(record.key)">
-              <a>删除</a>
-            </a-popconfirm>
-          </span>
-            <span v-else>
-            <a @click="saveRow(record.key)">保存</a>
-            <a-divider type="vertical" />
-            <a @click="cancle(record.key)">取消</a>
-          </span>
-        </template>
-        <span v-else>
-          <a @click="toggle(record.key)">下载</a>
-          <a-divider type="vertical" />
-          <a-popconfirm title="是否要删除此行？" @confirm="remove(record.key)">
-            <a>删除</a>
-          </a-popconfirm>
-        </span>
-      </template>
     </a-table>
     <!--<a-button style="width: 100%; margin-top: 16px; margin-bottom: 8px" type="dashed" icon="plus" @click="newMeber">新增成员</a-button>-->
   </form>
@@ -47,30 +24,25 @@
 <script>
 const columns = [
   {
-    title: '音乐名',
+    title: '标题',
     dataIndex: 'name',
     key: 'name',
-    width: '30%',
+    width: '70%',
     scopedSlots: { customRender: 'name' }
   },
   {
-    title: '歌手',
+    title: '时长',
     dataIndex: 'workId',
     key: 'workId',
-    width: '30%',
+    width: '15%',
     scopedSlots: { customRender: 'workId' }
   },
   {
-    title: '音乐大小',
+    title: '歌手',
     dataIndex: 'department',
     key: 'department',
-    width: '20%',
+    width: '15%',
     scopedSlots: { customRender: 'department' }
-  },
-  {
-    title: '操作',
-    key: 'action',
-    scopedSlots: { customRender: 'operation' }
   }
 ]
 

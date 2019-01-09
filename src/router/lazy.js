@@ -19,7 +19,7 @@ export default new Router({
       path: '/',
       name: '首页',
       component: MenuView,
-      redirect: '/login',
+      redirect: '/music/musicList',
       icon: 'none',
       invisible: true,
       children: [
@@ -50,9 +50,9 @@ export default new Router({
           icon: 'dashboard',
           children: [
             {
-              path: '/music/music',
-              name: '我的音乐',
-              component: () => import('@/pages/music/Music'),
+              path: '/music/musicList',
+              name: '音乐列表',
+              component: () => import('@/pages/music/MusicList'),
               icon: 'none'
             }
           ]

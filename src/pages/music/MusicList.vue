@@ -79,13 +79,19 @@
           <!--</span>-->
         <!--</a-form>-->
       <!--</div>-->
-      <div>
-        <div class="operator">
-          <a-button @click="addNew" type="upload">上传音乐</a-button>
-        </div>
-      </div>
+      <!--<div>-->
+        <!--<div class="operator">-->
+          <!--<a-button @click="addNew" type="upload">上传音乐</a-button>-->
+        <!--</div>-->
+      <!--</div>-->
       <!--<a-back-top />-->
-      <a-card title="音乐管理" :bordered="false">
+      <a-input-search
+        style="width: 200px"
+        placeholder="音乐搜索"
+        @search="onSearch"
+        enterButton
+      />
+      <a-card title="云音乐热歌榜" :bordered="false">
         <table-form />
       </a-card>
     </a-card>
