@@ -92,69 +92,33 @@
         enterButton
       />
       <a-card title="云音乐热歌榜" :bordered="false">
-        <table-form />
+        {{musicList.tracks[0].name}}
+        {{musicList.tracks[0].ar[0].name}}
+        <TableForm :musicList="musicList"></TableForm>
       </a-card>
     </a-card>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import StandardTable from '../../components/table/StandardTable'
 import TableForm from '../form/advancedForm/TableForm'
-const columns = [
-  {
-    title: '音乐名',
-    dataIndex: 'no'
-  },
-  {
-    title: '大小',
-    dataIndex: 'description'
-  },
-  {
-    title: '下载量',
-    dataIndex: 'callNo',
-    sorter: true,
-    needTotal: true,
-    customRender: (text) => text + ' 次'
-  },
-  // {
-  //   title: '状态',
-  //   dataIndex: 'status',
-  //   needTotal: true
-  // },
-  {
-    title: '上传时间',
-    dataIndex: 'updatedAt',
-    sorter: true
-  }
-]
-
-const dataSource = []
-
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: '音乐 ' + i,
-    description: '5M',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
-
 export default {
   name: 'QueryList',
   components: {StandardTable, TableForm},
-  data () {
-    return {
-      advanced: true,
-      columns: columns,
-      dataSource: dataSource,
-      selectedRowKeys: [],
-      selectedRows: []
-    }
+  computed: {
+    ...mapGetters([
+      'getToken'
+    ]),
+    ...mapState({
+      musicList: state => state.music_list_store.fetchedList
+    })
   },
   methods: {
+    initializeFetch () {
+      this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
+    },
     toggleAdvanced () {
       this.advanced = !this.advanced
     },
@@ -182,6 +146,12 @@ export default {
         this.remove()
       }
     }
+  },
+  mounted () {
+    this.initializeFetch()
+  },
+  activated () {
+    this.initializeFetch()
   }
 }
 </script>
