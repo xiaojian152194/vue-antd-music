@@ -7,6 +7,7 @@ import 'ant-design-vue/dist/antd.css'
 import Antd from 'ant-design-vue'
 import Viser from 'viser-vue'
 import axios from 'axios'
+import util from '@/utils/utils'
 import '@/mock'
 import store from './store'
 import PouchDB from 'pouchdb'
@@ -23,6 +24,17 @@ new Vue({
   store,
   components: { App },
   template: '<App/>',
+  methods: {
+    longTimestampRender: function (h, params) {
+      let longTimestamp = params.row[params.column.key]
+      return h('span', util.longTimestampToString(longTimestamp))
+    }
+  },
+  filters: {
+    longTimestamp: function (value) {
+      return util.longTimestampToString(value)
+    }
+  },
   mounted () {
     var db = new PouchDB('admindb')
     db.get('currUser').then(doc => {

@@ -110,7 +110,7 @@ const MusicListStore = {
     },
     CHANGE_FETCH_LIST_STATE (state, payload) {
       if (payload.state === 'success') {
-        state.fetchedList = payload.playlist || {}
+        state.fetchedList = payload.playlist || []
         // state.fetchedCurrentPage = payload.pageNumber || 1
         // state.fetchedTotalCount = payload.totalCount || 0
       }

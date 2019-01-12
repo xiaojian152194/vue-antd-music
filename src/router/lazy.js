@@ -54,6 +54,12 @@ export default new Router({
               name: '音乐列表',
               component: () => import('@/pages/music/MusicList'),
               icon: 'none'
+            },
+            {
+              path: '/music/musicPlay',
+              name: '音乐播放',
+              component: () => import('@/pages/music/MusicPlay'),
+              icon: 'none'
             }
           ]
         },

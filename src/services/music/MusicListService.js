@@ -13,7 +13,7 @@ const MusicListService = {
     })
   },
   get: () => {
-    return baseService('api/top/list?idx=1', {
+    return baseService('api/top/list?idx=3', {
       method: 'get'
     })
   },
