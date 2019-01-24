@@ -1,14 +1,28 @@
 <template>
-  <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
-      <!--<a slot="name" slot-scope="text" :onclick="getMusicId(text)">{{text}}</a>-->
-    <router-link slot="name" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">{{text}}
-    </router-link>
-  </a-table>
+  <div>
+    <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
+        <!--<a slot="name" slot-scope="text" :onclick="getMusicId(text)">{{text}}</a>-->
+      <!-- <router-link slot="name" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">{{text}}
+      </router-link> -->
+      <a slot="name" slot-scope="text" >{{text}}
+      </a>
+    </a-table>
+    <aplayer :list="[]"
+             :music="{
+              title: '第三人称（Cover Hush！）',
+              artist: '买辣椒也用券',
+              src: 'http://music.163.com/song/media/outer/url?id=529668356',
+              pic: 'https://p1.music.126.net/gZ4VUKzlS5Nk1DTmlicb7w==/109951163013152269.jpg?param=34y34'
+              }"
+    />
+  </div>
 </template>
 
 <script>
+import Aplayer from 'vue-aplayer'
 export default {
   name: 'MusicListTable',
+  components: { Aplayer },
   props: {
     'musicList': {
       default: function () { return [] }
@@ -35,8 +49,8 @@ export default {
         //     })
         //   }
         // },
-        { title: '标题', dataIndex: 'id', width: '65%', sortable: 'true', scopedSlots: { customRender: 'name' } },
-        { title: '时长', dataIndex: 'dt', width: '15%', sortable: 'true' },
+        { title: '标题', dataIndex: 'name', width: '65%', sortable: 'true', scopedSlots: { customRender: 'name' } },
+        { title: '时长', dataIndex: 'dt', width: '15%', sortable: 'true', render: this.musicTimeFormatRender },
         { title: '歌手', dataIndex: 'ar[0].name', width: '20%', sortable: 'true' }
       ]
     }

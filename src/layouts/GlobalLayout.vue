@@ -16,7 +16,7 @@
         <slot></slot>
       </a-layout-content>
       <a-layout-footer style="padding: 20px">
-        <music-player/>
+        <!-- <music-player/> -->
         <global-footer :design="design" />
       </a-layout-footer>
     </a-layout>

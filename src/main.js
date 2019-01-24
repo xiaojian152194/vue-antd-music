@@ -18,23 +18,25 @@ Vue.use(Viser)
 Vue.use(Antd)
 
 /* eslint-disable no-new */
+Vue.mixin({
+  methods: {
+    musicTimeFormatRender: function (h, params) {
+      let musicDt = params.row[params.column.dataIndex]
+      return h('span', util.musicTimeFormat(musicDt))
+    }
+  },
+  filters: {
+    // longTimestamp: function (value) {
+    //   return util.longTimestampToString(value)
+    // }
+  }
+})
 new Vue({
   el: '#app',
   router,
   store,
   components: { App },
   template: '<App/>',
-  methods: {
-    longTimestampRender: function (h, params) {
-      let longTimestamp = params.row[params.column.key]
-      return h('span', util.longTimestampToString(longTimestamp))
-    }
-  },
-  filters: {
-    longTimestamp: function (value) {
-      return util.longTimestampToString(value)
-    }
-  },
   mounted () {
     var db = new PouchDB('admindb')
     db.get('currUser').then(doc => {
