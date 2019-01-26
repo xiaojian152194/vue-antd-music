@@ -1,14 +1,13 @@
 <template>
   <div>
     <!--<aplayer :audio="audio" :lrcType="3" />-->
-    <aplayer :showLrc = true
-    :music="{
-    title: this.music.name,
-    artist: this.author.name,
-    src: 'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id,
-    lrc: this.lrc.lyric,
-    pic: this.music.picUrl
-    }"
+    <aplayer :showLrc = true :music = "{
+        title: this.musicUrl.name,
+        artist: this.author.name,
+        src: 'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id,
+        lrc: this.lrc.lyric,
+        pic: this.musicUrl.picUrl
+      }"
     />
   </div>
 </template>
@@ -19,11 +18,11 @@ import { mapState, mapGetters } from 'vuex'
 import Aplayer from 'vue-aplayer'
 // Vue.use(Aplayer)
 export default {
-  name: 'COM_YZJ_MUSIC_PLAY',
+  name: 'MusicPlay',
   components: { Aplayer },
   data () {
     return {
-      music: {
+      musicUrl: {
         name: null,
         picUrl: null
       },
@@ -46,6 +45,9 @@ export default {
   },
   methods: {
     initializeLoad () {
+      this.$set(this, 'musicUrl', {})
+      this.$set(this, 'author', {})
+      this.$set(this, 'lrc', {})
       this.$store.dispatch('music_url_store/FETCH_MUSIC_URL', this.$route.query.music_id)
       this.$store.dispatch('music_url_store/FETCH_MUSIC_LRC', this.$route.query.music_id)
     }
@@ -54,7 +56,7 @@ export default {
     musicState: {
       handler (curVal, oldVal) {
         if (curVal) {
-          this.music = Object.assign({}, curVal)
+          this.musicUrl = Object.assign({}, curVal)
         }
       },
       deep: true
@@ -76,7 +78,10 @@ export default {
       deep: true
     }
   },
-  created () {
+  // created () {
+  //   this.initializeLoad()
+  // },
+  activated () {
     this.initializeLoad()
   }
   // mounted () {

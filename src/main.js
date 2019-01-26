@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/lazy'
 import 'ant-design-vue/dist/antd.css'
+import Icon from 'vue-awesome/components/Icon'
 import Antd from 'ant-design-vue'
 import Viser from 'viser-vue'
 import axios from 'axios'
@@ -16,11 +17,12 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(Viser)
 Vue.use(Antd)
-
+Vue.component('icon', Icon)
 /* eslint-disable no-new */
 Vue.mixin({
   methods: {
     musicTimeFormatRender: function (h, params) {
+      debugger
       let musicDt = params.row[params.column.dataIndex]
       return h('span', util.musicTimeFormat(musicDt))
     }

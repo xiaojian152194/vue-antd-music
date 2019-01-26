@@ -2,16 +2,19 @@
   <div>
     <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
         <!--<a slot="name" slot-scope="text" :onclick="getMusicId(text)">{{text}}</a>-->
-      <router-link slot="id" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">{{text}}
+      <router-link slot="play" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">
+        播放
       </router-link>
       <!--<a slot="id" slot-scope="text" @click="getMusicUrl(text)">{{text}}-->
       <!--</a>-->
     </a-table>
+    {{executionColumns}}
   </div>
 </template>
 
 <script>
 import Aplayer from 'vue-aplayer'
+import AIcon from 'ant-design-vue/es/icon/icon'
 
 export default {
   name: 'MusicListTable',
@@ -29,6 +32,7 @@ export default {
     }
   },
   components: {
+    AIcon,
     Aplayer
   },
   data () {
@@ -46,8 +50,9 @@ export default {
         //     })
         //   }
         // },
-        {title: '标题', dataIndex: 'id', width: '65%', sortable: 'true', scopedSlots: {customRender: 'id'}},
-        {title: '时长', dataIndex: 'dt', width: '15%', sortable: 'true', render: this.musicTimeFormatRender},
+        {title: '播放', dataIndex: 'id', width: '10%', sortable: 'true', scopedSlots: {customRender: 'play'}},
+        {title: '标题', dataIndex: 'name', width: '60%', sortable: 'true'},
+        {title: '时长', dataIndex: 'dt', width: '10%', sortable: 'true', render: this.musicTimeFormatRender},
         {title: '歌手', dataIndex: 'ar[0].name', width: '20%', sortable: 'true'}
       ]
     }

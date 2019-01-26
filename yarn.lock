@@ -8507,6 +8507,11 @@ vue-aplayer@^1.6.1:
   resolved "http://registry.npm.taobao.org/vue-aplayer/download/vue-aplayer-1.6.1.tgz#17fd419b091e09425bc737fa9e84f55565160df6"
   integrity sha1-F/1BmwkeCUJbxzf6noT1VWUWDfY=
 
+vue-awesome@^3.3.1:
+  version "3.3.1"
+  resolved "http://registry.npm.taobao.org/vue-awesome/download/vue-awesome-3.3.1.tgz#028fce4e2ef1775cff13c077679efc5fdd5a922f"
+  integrity sha1-Ao/OTi7xd1z/E8B3Z578X91aki8=
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
