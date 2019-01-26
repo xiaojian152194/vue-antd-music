@@ -7,8 +7,13 @@ import baseService from '@/services/baseService'
 
 // const URL = ''
 const MusicUrlService = {
-  getByPrimaryKey: (musicId) => {
+  getMusicUrl: (musicId) => {
     return baseService('api/song/detail?ids=' + musicId, {
+      method: 'get'
+    })
+  },
+  getMusicLrc: (musicId) => {
+    return baseService('api/lyric?id=' + musicId, {
       method: 'get'
     })
   },

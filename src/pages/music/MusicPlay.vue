@@ -1,11 +1,12 @@
 <template>
   <div>
     <!--<aplayer :audio="audio" :lrcType="3" />-->
-    <aplayer
+    <aplayer :showLrc = true
     :music="{
     title: this.music.name,
     artist: this.author.name,
     src: 'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id,
+    lrc: this.lrc.lyric,
     pic: this.music.picUrl
     }"
     />
@@ -28,22 +29,25 @@ export default {
       },
       author: {
         name: null
+      },
+      lrc: {
+        lyric: null
       }
     }
   },
   computed: {
     ...mapGetters([
-      'getToken'
     ]),
     ...mapState({
       musicState: state => state.music_url_store.fetchedMusicList,
-      musicAuthorState: state => state.music_url_store.fetchedAuthorList
+      musicAuthorState: state => state.music_url_store.fetchedAuthorList,
+      musicLrcState: state => state.music_url_store.fetchedMusicLrc
     })
   },
   methods: {
     initializeLoad () {
-      // debugger
       this.$store.dispatch('music_url_store/FETCH_MUSIC_URL', this.$route.query.music_id)
+      this.$store.dispatch('music_url_store/FETCH_MUSIC_LRC', this.$route.query.music_id)
     }
   },
   watch: {
@@ -59,6 +63,14 @@ export default {
       handler (curVal, oldVal) {
         if (curVal) {
           this.author = Object.assign({}, curVal)
+        }
+      },
+      deep: true
+    },
+    musicLrcState: {
+      handler (curVal, oldVal) {
+        if (curVal) {
+          this.lrc = Object.assign({}, curVal)
         }
       },
       deep: true

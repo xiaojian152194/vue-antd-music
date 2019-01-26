@@ -19,6 +19,7 @@ const MusicUrlStore = {
       fetchingListErrorMessage: null,
       fetchedMusicList: [],
       fetchedAuthorList: [],
+      fetchedMusicLrc: [],
       fetchedCurrentPage: 1,
       fetchedTotalCount: 0,
       dynamicFetch: {},
@@ -169,12 +170,17 @@ const MusicUrlStore = {
     CHANGE_MUSIC_LIST_STATE (state, payload) {
       state.checkState = payload.state
       state.checkErrorMessage = payload.message
+    },
+    CHANGE_FETCH_MUSIC_LRC_STATE (state, payload) {
+      if (payload.state === 'success') {
+        state.fetchedMusicLrc = payload.lrc || []
+      }
     }
   },
   actions: {
     FETCH_MUSIC_URL: ({dispatch, commit, state, rootState, rootGetters}, context) => {
       commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'start'})
-      MusicUrlService.getByPrimaryKey(context).then(function (response) {
+      MusicUrlService.getMusicUrl(context).then(function (response) {
         if (response.data && response.data.code === 200) {
           commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'success', ...response.data})
         } else {
@@ -185,6 +191,22 @@ const MusicUrlStore = {
           commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', message: response.message})
         } else {
           commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', ...response.data})
+        }
+      })
+    },
+    FETCH_MUSIC_LRC: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'start'})
+      MusicUrlService.getMusicLrc(context).then(function (response) {
+        if (response.data && response.data.code === 200) {
+          commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'success', ...response.data})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'error', message: response.message})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'error', ...response.data})
         }
       })
     }
