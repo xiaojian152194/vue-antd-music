@@ -19,7 +19,7 @@ export default new Router({
       path: '/',
       name: '首页',
       component: MenuView,
-      redirect: '/music/musicList',
+      redirect: '/login',
       icon: 'none',
       invisible: true,
       children: [

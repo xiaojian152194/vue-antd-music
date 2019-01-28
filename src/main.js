@@ -22,7 +22,6 @@ Vue.component('icon', Icon)
 Vue.mixin({
   methods: {
     musicTimeFormatRender: function (h, params) {
-      debugger
       let musicDt = params.row[params.column.dataIndex]
       return h('span', util.musicTimeFormat(musicDt))
     }
@@ -37,6 +36,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  render: h => h(App),
   components: { App },
   template: '<App/>',
   mounted () {

@@ -8,13 +8,13 @@
       <!--<a slot="id" slot-scope="text" @click="getMusicUrl(text)">{{text}}-->
       <!--</a>-->
     </a-table>
-    {{executionColumns}}
   </div>
 </template>
 
 <script>
 import Aplayer from 'vue-aplayer'
 import AIcon from 'ant-design-vue/es/icon/icon'
+// import util from '@/utils/utils'
 
 export default {
   name: 'MusicListTable',
@@ -63,6 +63,11 @@ export default {
         return this.executionColumns.indexOf(column.dataIndex) === -1
       })
     }
+    // musicTimeFormatRender (h, params) {
+    //   debugger
+    //   let musicDt = params.row[params.column.dataIndex]
+    //   return h('span', util.musicTimeFormat(musicDt))
+    // }
   },
   mounted () {
     // this.initTableColumn(this.musicListColumns)
