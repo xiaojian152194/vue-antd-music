@@ -60,6 +60,12 @@ export default new Router({
               name: '音乐播放',
               component: () => import('@/pages/music/MusicPlay'),
               icon: 'none'
+            },
+            {
+              path: '/music/musicSearch',
+              name: '音乐搜索',
+              component: () => import('@/pages/music/musicSearch'),
+              icon: 'none'
             }
           ]
         },

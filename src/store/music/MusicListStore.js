@@ -153,9 +153,13 @@ const MusicListStore = {
       state.loadingDisplayErrorMessage = payload.message
       state.currentDisplayObject = payload.currentObject || {}
     },
-    CHANGE_MUSIC_LIST_STATE (state, payload) {
-      state.checkState = payload.state
-      state.checkErrorMessage = payload.message
+    CHANGE_MUSIC_STATE (state, payload) {
+      debugger
+      if (payload.state === 'success') {
+        state.fetchedList = payload.result || []
+        // state.fetchedCurrentPage = payload.pageNumber || 1
+        // state.fetchedTotalCount = payload.totalCount || 0
+      }
     }
   },
   actions: {
@@ -175,19 +179,20 @@ const MusicListStore = {
         }
       })
     },
-    MUSIC_LIST: ({dispatch, commit, state, rootState, rootGetters}) => {
-      commit('CHANGE_MUSIC_LIST_STATE', {state: 'start'})
-      MusicListService.get().then(function (response) {
-        if (response.data.successResponse && response.data.code === 200) {
-          commit('CHANGE_MUSIC_LIST_STATE', {state: 'success'})
+    FETCH_MUSIC: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      commit('CHANGE_MUSIC_STATE', {state: 'start'})
+      debugger
+      MusicListService.getByPrimaryKey(context).then(function (response) {
+        if (response.data && response.data.code === 200) {
+          commit('CHANGE_MUSIC_STATE', {state: 'success', ...response.data})
         } else {
-          commit('CHANGE_MUSIC_LIST_STATE', {state: 'error', message: response.data.message})
+          commit('CHANGE_MUSIC_STATE', {state: 'error', message: response.data.message})
         }
       }).catch(function (response) {
         if (response instanceof Error) {
-          commit('CHANGE_MUSIC_LIST_STATE', {state: 'error', message: response.message})
+          commit('CHANGE_MUSIC_STATE', {state: 'error', message: response.message})
         } else {
-          commit('CHANGE_MUSIC_LIST_STATE', {state: 'error', message: response.data.message})
+          commit('CHANGE_MUSIC_STATE', {state: 'error', message: response.data})
         }
       })
     }

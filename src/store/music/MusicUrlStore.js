@@ -17,9 +17,10 @@ const MusicUrlStore = {
       fetchParameters: null,
       fetchingListState: 'no',
       fetchingListErrorMessage: null,
-      fetchedMusicList: [],
-      fetchedAuthorList: [],
-      fetchedMusicLrc: [],
+      MusicName: [],
+      AuthorName: [],
+      MusicPic: [],
+      MusicLrc: [],
       fetchedCurrentPage: 1,
       fetchedTotalCount: 0,
       dynamicFetch: {},
@@ -113,7 +114,9 @@ const MusicUrlStore = {
     CHANGE_FETCH_MUSIC_URL_STATE (state, payload) {
       if (payload.state === 'success') {
         // debugger
-        state.fetchedMusicList = payload.songs[0].al || []
+        state.MusicName = payload.songs[0] || []
+        state.AuthorName = payload.songs[0].ar[0] || []
+        state.MusicPic = payload.songs[0].al || []
         // if (payload.songs[0].ar.length > 0) {
         //   debugger
         //   var author
@@ -124,7 +127,7 @@ const MusicUrlStore = {
         // } else {
         //   state.fetchedAuthorList = payload.songs[0].ar || []
         // }
-        state.fetchedAuthorList = payload.songs[0].ar[0] || []
+
         // state.fetchedCurrentPage = payload.pageNumber || 1
         // state.fetchedTotalCount = payload.totalCount || 0
       }
@@ -173,7 +176,7 @@ const MusicUrlStore = {
     },
     CHANGE_FETCH_MUSIC_LRC_STATE (state, payload) {
       if (payload.state === 'success') {
-        state.fetchedMusicLrc = payload.lrc || []
+        state.MusicLrc = payload.lrc || []
       }
     }
   },
