@@ -11,7 +11,7 @@
         <i-menu style="height: 64px; line-height: 64px;" :theme="theme" mode="horizontal" :menuData="menuData" @select="onSelect"/>
       </div>
       <div :class="['global-header-right', theme]">
-          <header-search class="header-item" />
+          <!--<header-search class="header-item" />-->
           <header-avatar class="header-item"/>
       </div>
     </div>

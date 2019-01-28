@@ -8,9 +8,9 @@
     <!--<div class="copyright">-->
       <!--Copyright<a-icon type="copyright" />{{copyright}}-->
     <!--</div>-->
-    <div class="design">
-      {{design}}
-    </div>
+    <!--<div class="design">-->
+      <!--{{design}}-->
+    <!--</div>-->
   </div>
 </template>
 

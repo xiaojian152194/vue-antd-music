@@ -4,7 +4,7 @@ export default {
     isMobile: false,
     theme: 'dark',
     layout: 'side',
-    systemName: 'XJ MUSIC',
+    systemName: 'P Cloud Music',
     copyright: '123',
     design: 'design by xiaojian',
     footerLinks: [

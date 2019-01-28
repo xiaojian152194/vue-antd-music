@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider :class="[theme, 'sider', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div :class="['logo', theme]">
-      <router-link to="/dashboard/workplace">
+      <router-link to="/music/musicList">
         <img src="static/img/logo2.png">
         <h1>{{systemName}}</h1>
       </router-link>

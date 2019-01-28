@@ -50,9 +50,15 @@ export default new Router({
           icon: 'dashboard',
           children: [
             {
-              path: '/music/music',
-              name: '我的音乐',
-              component: () => import('@/pages/music/Music'),
+              path: '/music/musicList',
+              name: '音乐列表',
+              component: () => import('@/pages/music/MusicList'),
+              icon: 'none'
+            },
+            {
+              path: '/music/musicPlay',
+              name: '音乐播放',
+              component: () => import('@/pages/music/MusicPlay'),
               icon: 'none'
             }
           ]
