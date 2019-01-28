@@ -2,12 +2,13 @@
   <div>
     <a-card>
       <a-input-search
-        style="width: 200px"
+        style="width: 500px; margin-left: 25%"
         placeholder="音乐搜索"
+        @search="onSearch"
         enterButton
       />
-      <a-card title="云音乐热歌榜" :bordered="false">
-        <TableForm :musicList="musicList.tracks"></TableForm>
+      <a-card title="音乐搜索列表" :bordered="false">
+        <MusicSearchForm :musicList="musicList.songs"></MusicSearchForm>
       </a-card>
     </a-card>
   </div>
@@ -16,10 +17,10 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import StandardTable from '../../components/table/StandardTable'
-import TableForm from '../form/advancedForm/TableForm'
+import MusicSearchForm from '../form/advancedForm/MusicSearchForm'
 export default {
   name: 'MusicList',
-  components: {StandardTable, TableForm},
+  components: {StandardTable, MusicSearchForm},
   computed: {
     ...mapGetters([
       'getToken'
@@ -29,16 +30,20 @@ export default {
     })
   },
   methods: {
-    initializeFetch () {
-      this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
+    // initializeFetch () {
+    //   this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
+    // },
+    onSearch (value) {
+      this.$store.dispatch('music_list_store/FETCH_MUSIC', value)
+      console.log(value)
     }
   },
   mounted () {
-    this.initializeFetch()
-  },
-  activated () {
-    this.initializeFetch()
+    // this.initializeFetch()
   }
+  // activated () {
+  //   this.initializeFetch()
+  // }
 }
 </script>
 

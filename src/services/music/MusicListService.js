@@ -5,10 +5,10 @@
 import baseService from '@/services/baseService'
 // import dataService from '@/services/dataService'
 
-const URL = ''
+// const URL = ''
 const MusicListService = {
-  getByPrimaryKey: (opportunityId) => {
-    return baseService(URL + '/' + opportunityId, {
+  getByPrimaryKey: (searchKey) => {
+    return baseService('api/search?keywords=' + searchKey, {
       method: 'get'
     })
   },

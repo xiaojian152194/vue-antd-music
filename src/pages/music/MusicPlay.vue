@@ -2,11 +2,11 @@
   <div>
     <!--<aplayer :audio="audio" :lrcType="3" />-->
     <aplayer :showLrc = true :music = "{
-        title: this.musicUrl.name,
-        artist: this.author.name,
+        title: this.musicName.name,
+        artist: this.authorName.name,
         src: 'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id,
         lrc: this.lrc.lyric,
-        pic: this.musicUrl.picUrl
+        pic: this.musicPic.picUrl
       }"
     />
   </div>
@@ -22,11 +22,13 @@ export default {
   components: { Aplayer },
   data () {
     return {
-      musicUrl: {
-        name: null,
+      musicName: {
+        name: null
+      },
+      musicPic: {
         picUrl: null
       },
-      author: {
+      authorName: {
         name: null
       },
       lrc: {
@@ -38,9 +40,10 @@ export default {
     ...mapGetters([
     ]),
     ...mapState({
-      musicState: state => state.music_url_store.fetchedMusicList,
-      musicAuthorState: state => state.music_url_store.fetchedAuthorList,
-      musicLrcState: state => state.music_url_store.fetchedMusicLrc
+      musicState: state => state.music_url_store.MusicName,
+      musicPicState: state => state.music_url_store.MusicPic,
+      musicAuthorState: state => state.music_url_store.AuthorName,
+      musicLrcState: state => state.music_url_store.MusicLrc
     })
   },
   methods: {
@@ -56,7 +59,15 @@ export default {
     musicState: {
       handler (curVal, oldVal) {
         if (curVal) {
-          this.musicUrl = Object.assign({}, curVal)
+          this.musicName = Object.assign({}, curVal)
+        }
+      },
+      deep: true
+    },
+    musicPicState: {
+      handler (curVal, oldVal) {
+        if (curVal) {
+          this.musicPic = Object.assign({}, curVal)
         }
       },
       deep: true
@@ -64,7 +75,7 @@ export default {
     musicAuthorState: {
       handler (curVal, oldVal) {
         if (curVal) {
-          this.author = Object.assign({}, curVal)
+          this.authorName = Object.assign({}, curVal)
         }
       },
       deep: true
