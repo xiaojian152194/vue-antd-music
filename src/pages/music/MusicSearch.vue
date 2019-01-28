@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     initializeFetch () {
-      debugger
+      // debugger
       if (this.$route.query.keyWorlds !== undefined) {
         let value = this.$route.query.keyWorlds
         this.$store.dispatch('music_list_store/FETCH_MUSIC', value)
