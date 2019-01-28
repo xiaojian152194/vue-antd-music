@@ -154,7 +154,6 @@ const MusicListStore = {
       state.currentDisplayObject = payload.currentObject || {}
     },
     CHANGE_MUSIC_STATE (state, payload) {
-      debugger
       if (payload.state === 'success') {
         state.fetchedList = payload.result || []
         // state.fetchedCurrentPage = payload.pageNumber || 1
@@ -181,7 +180,6 @@ const MusicListStore = {
     },
     FETCH_MUSIC: ({dispatch, commit, state, rootState, rootGetters}, context) => {
       commit('CHANGE_MUSIC_STATE', {state: 'start'})
-      debugger
       MusicListService.getByPrimaryKey(context).then(function (response) {
         if (response.data && response.data.code === 200) {
           commit('CHANGE_MUSIC_STATE', {state: 'success', ...response.data})

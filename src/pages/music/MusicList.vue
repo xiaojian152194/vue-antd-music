@@ -2,8 +2,9 @@
   <div>
     <a-card>
       <a-input-search
-        style="width: 200px"
+        style="width: 230px"
         placeholder="音乐搜索"
+        @search="onSearch"
         enterButton
       />
       <a-card title="云音乐热歌榜" :bordered="false">
@@ -31,6 +32,9 @@ export default {
   methods: {
     initializeFetch () {
       this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
+    },
+    onSearch (value) {
+      this.$router.push({path: '/music/musicSearch', query: {keyWorlds: value}})
     }
   },
   mounted () {

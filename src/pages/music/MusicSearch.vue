@@ -30,20 +30,23 @@ export default {
     })
   },
   methods: {
-    // initializeFetch () {
-    //   this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
-    // },
+    initializeFetch () {
+      debugger
+      if (this.$route.query.keyWorlds !== undefined) {
+        let value = this.$route.query.keyWorlds
+        this.$store.dispatch('music_list_store/FETCH_MUSIC', value)
+      }
+    },
     onSearch (value) {
       this.$store.dispatch('music_list_store/FETCH_MUSIC', value)
-      console.log(value)
     }
   },
   mounted () {
-    // this.initializeFetch()
+    this.initializeFetch()
+  },
+  activated () {
+    this.initializeFetch()
   }
-  // activated () {
-  //   this.initializeFetch()
-  // }
 }
 </script>
 
