@@ -8,7 +8,7 @@
         enterButton
       />
       <a-card title="云音乐热歌榜" :bordered="false">
-        <TableForm :musicList="musicList.tracks"></TableForm>
+        <MusicListDisplay :musicList="musicList.tracks"></MusicListDisplay>
       </a-card>
     </a-card>
   </div>
@@ -16,11 +16,10 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import StandardTable from '../../components/table/StandardTable'
-import TableForm from '../form/advancedForm/TableForm'
+import MusicListDisplay from './MusicListDisplay'
 export default {
   name: 'MusicList',
-  components: {StandardTable, TableForm},
+  components: {MusicListDisplay},
   computed: {
     ...mapGetters([
       'getToken'
