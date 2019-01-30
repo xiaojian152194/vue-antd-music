@@ -12,10 +12,8 @@
 </template>
 
 <script>
-import Aplayer from 'vue-aplayer'
 import AIcon from 'ant-design-vue/es/icon/icon'
 // import util from '@/utils/utils'
-
 export default {
   name: 'MusicListTable',
   props: {
@@ -32,8 +30,7 @@ export default {
     }
   },
   components: {
-    AIcon,
-    Aplayer
+    AIcon
   },
   data () {
     return {
@@ -51,9 +48,9 @@ export default {
         //   }
         // },
         {title: '播放', dataIndex: 'id', width: '10%', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'name', width: '60%', sortable: 'true'},
-        {title: '时长', dataIndex: 'dt', width: '10%', sortable: 'true', render: this.musicTimeFormatRender},
-        {title: '歌手', dataIndex: 'ar[0].name', width: '20%', sortable: 'true'}
+        {title: '标题', dataIndex: 'name', width: '43%', sortable: 'true'},
+        {title: '专辑', dataIndex: 'alia[0]', width: '30%', sortable: 'true'},
+        {title: '歌手', dataIndex: 'ar[0].name', width: '27%', sortable: 'true'}
       ]
     }
   },
@@ -68,9 +65,6 @@ export default {
     //   let musicDt = params.row[params.column.dataIndex]
     //   return h('span', util.musicTimeFormat(musicDt))
     // }
-  },
-  mounted () {
-    // this.initTableColumn(this.musicListColumns)
   }
 }
 
