@@ -1,9 +1,10 @@
 import moment from 'moment'
 
 let util = {}
-
+debugger
 util.musicTimeFormat = function (h, msd) {
-  var time = parseFloat(msd) / 1000
+  // let musicDt = msd.row[msd.column.dataIndex]
+  let time = parseFloat(msd) / 1000
   if (time != null) {
     if (time > 60 && time < 60 * 60) {
       time = parseInt(time / 60.0) + ':' + parseInt((parseFloat(time / 60.0) - parseInt(time / 60.0)) * 60)
