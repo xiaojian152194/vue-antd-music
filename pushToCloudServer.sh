@@ -1,9 +1,18 @@
-#!/bin/sh
-#脚本运行
-echo "脚本运行"
-#打包vue程序
+#!/usr/bin/expect
 npm run build
-#上传程序到云服务器
-scp -r dist root@39.106.44.210:/root/dist
-echo "运行完成"
 
+set ip 39.106.44.210
+set password Yzj152194
+
+set timeout -1
+spawn scp -o StrictHostKeyChecking=no  -P 22 -r dist root@$ip:/root/vue/dist
+expect {
+ "(yes/no)?" {
+   send "yes\n"
+   expect "*assword:" { send "$password\n"}
+  }
+  "*assword:" {
+   send "$password\n"
+  }
+}
+expect eof

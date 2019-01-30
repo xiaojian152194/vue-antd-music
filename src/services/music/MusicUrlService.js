@@ -17,8 +17,8 @@ const MusicUrlService = {
       method: 'get'
     })
   },
-  get: () => {
-    return baseService('api/top/list?idx=3', {
+  getMusicCanPlay: (musicId) => {
+    return baseService('api/check/music?id=' + musicId, {
       method: 'get'
     })
   },

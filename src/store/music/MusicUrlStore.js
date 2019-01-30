@@ -17,10 +17,12 @@ const MusicUrlStore = {
       fetchParameters: null,
       fetchingListState: 'no',
       fetchingListErrorMessage: null,
+      MusicCanPlay: 'no',
       MusicName: [],
       AuthorName: [],
       MusicPic: [],
       MusicLrc: [],
+      checkMessage: null,
       fetchedCurrentPage: 1,
       fetchedTotalCount: 0,
       dynamicFetch: {},
@@ -178,10 +180,30 @@ const MusicUrlStore = {
       if (payload.state === 'success') {
         state.MusicLrc = payload.lrc || []
       }
+    },
+    CHANGE_FETCH_MUSIC_CAN_PLAY_STATE (state, payload) {
+      state.MusicCanPlay = payload.state
+      state.checkMessage = payload.message
     }
   },
   actions: {
     FETCH_MUSIC_URL: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      if (state.MusicCanPlay === 'start') { return }
+      commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'start'})
+      MusicUrlService.getMusicCanPlay(context).then(function (response) {
+        debugger
+        if (response.data && response.data.success === true) {
+          commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'success', ...response.data})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'error', ...response.data})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'error', ...response.data})
+        }
+      })
       commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'start'})
       MusicUrlService.getMusicUrl(context).then(function (response) {
         if (response.data && response.data.code === 200) {

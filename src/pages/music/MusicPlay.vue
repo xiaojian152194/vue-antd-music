@@ -9,6 +9,9 @@
         pic: this.musicPic.picUrl
       }"
     />
+    <Spin size="large" fix v-if="musicCanPlayState === 'start'">
+      <!--<Icon type="load-c" size=20 class="demo-spin-icon-load"></Icon><div>数据保存中……</div>-->
+    </Spin>
   </div>
 </template>
 
@@ -19,7 +22,7 @@ import Aplayer from 'vue-aplayer'
 // Vue.use(Aplayer)
 export default {
   name: 'MusicPlay',
-  components: { Aplayer },
+  components: {Aplayer},
   data () {
     return {
       musicName: {
@@ -37,13 +40,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-    ]),
+    ...mapGetters([]),
     ...mapState({
       musicState: state => state.music_url_store.MusicName,
       musicPicState: state => state.music_url_store.MusicPic,
       musicAuthorState: state => state.music_url_store.AuthorName,
-      musicLrcState: state => state.music_url_store.MusicLrc
+      musicLrcState: state => state.music_url_store.MusicLrc,
+      musicCanPlayState: state => state.music_url_store.MusicCanPlay,
+      musicCanPlayMessage: state => state.music_url_store.checkMessage
     })
   },
   methods: {
@@ -87,6 +91,13 @@ export default {
         }
       },
       deep: true
+    },
+    musicCanPlayState (state) {
+      if (state === 'error') {
+        this.$message.warning('亲爱的,暂无版权')
+      } else if (state === 'success') {
+        this.$message.success(this.musicCanPlayMessage + ' 音乐加载成功!')
+      }
     }
   },
   // created () {

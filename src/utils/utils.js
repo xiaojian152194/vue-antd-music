@@ -1,7 +1,6 @@
 import moment from 'moment'
 
 let util = {}
-debugger
 util.musicTimeFormat = function (h, msd) {
   // let musicDt = msd.row[msd.column.dataIndex]
   let time = parseFloat(msd) / 1000
