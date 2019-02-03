@@ -10,6 +10,18 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/music',
+      component: MenuView,
+      invisible: true,
+      children: [
+        {
+          path: '/music/musicPlay',
+          name: '音乐播放',
+          component: () => import('@/pages/music/MusicPlay')
+        }
+      ]
+    },
+    {
       path: '/login',
       name: '登录页',
       component: Login,
@@ -53,12 +65,6 @@ export default new Router({
               path: '/music/musicList',
               name: '音乐列表',
               component: () => import('@/pages/music/MusicList'),
-              icon: 'none'
-            },
-            {
-              path: '/music/musicPlay',
-              name: '音乐播放',
-              component: () => import('@/pages/music/MusicPlay'),
               icon: 'none'
             },
             {
