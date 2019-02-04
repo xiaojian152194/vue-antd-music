@@ -191,7 +191,6 @@ const MusicUrlStore = {
       if (state.MusicCanPlay === 'start') { return }
       commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'start'})
       MusicUrlService.getMusicCanPlay(context).then(function (response) {
-        debugger
         if (response.data && response.data.success === true) {
           commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'success', ...response.data})
         } else {
