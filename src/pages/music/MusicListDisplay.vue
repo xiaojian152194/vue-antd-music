@@ -2,7 +2,7 @@
   <div>
     <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
       <router-link slot="play" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">
-        播放
+        <a-icon type="play-circle" style="margin-left: 7px"/>
       </router-link>
       <!--<a slot="play" slot-scope="text" @click="getMusicUrl(text)">{{text}}-->
       <!--</a>-->
@@ -45,8 +45,8 @@ export default {
         //     })
         //   }
         // },
-        {title: '播放', dataIndex: 'id', width: '10%', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'name', width: '43%', sortable: 'true'},
+        {title: '播放', dataIndex: 'id', width: '8%', sortable: 'true', scopedSlots: {customRender: 'play'}},
+        {title: '标题', dataIndex: 'name', width: '45%', sortable: 'true'},
         {title: '专辑', dataIndex: 'alia[0]', width: '30%', sortable: 'true'},
         {title: '歌手', dataIndex: 'ar[0].name', width: '27%', sortable: 'true'}
       ]

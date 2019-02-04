@@ -59,33 +59,39 @@ export default new Router({
           path: '/music',
           name: '音乐',
           component: RouteView,
-          icon: 'dashboard',
+          icon: 'caret-right',
           children: [
             {
               path: '/music/musicList',
               name: '音乐列表',
               component: () => import('@/pages/music/MusicList'),
-              icon: 'none'
+              icon: 'cloud'
             },
             {
               path: '/music/musicSearch',
               name: '音乐搜索',
-              component: () => import('@/pages/music/musicSearch'),
-              icon: 'none'
+              component: () => import('@/pages/music/MusicSearch'),
+              icon: 'search'
             }
           ]
         },
         {
-          path: '/setting',
-          name: '设置',
+          path: '/personal',
+          name: '我的',
           component: RouteView,
-          icon: 'setting',
+          icon: 'home',
           children: [
             {
-              path: '/setting/personal',
-              name: '个人中心',
-              component: () => import('@/pages/setting/Personal'),
-              icon: 'none'
+              path: '/personal/pmusic',
+              name: '个人音乐',
+              component: () => import('@/pages/personal/PMusic'),
+              icon: 'heart'
+            },
+            {
+              path: '/personal/setting',
+              name: '设置',
+              component: () => import('@/pages/personal/Settings'),
+              icon: 'setting'
             }
           ]
         }
