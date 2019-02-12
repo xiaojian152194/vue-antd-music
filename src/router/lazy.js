@@ -4,15 +4,34 @@ import Router from 'vue-router'
 import RouteView from '@/layouts/RouteView'
 import MenuView from '@/layouts/MenuView'
 import Login from '@/pages/login/Login'
+import Register from '@/pages/login/Register'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
+      path: '/music',
+      component: MenuView,
+      invisible: true,
+      children: [
+        {
+          path: '/music/musicPlay',
+          name: '音乐播放',
+          component: () => import('@/pages/music/MusicPlay')
+        }
+      ]
+    },
+    {
       path: '/login',
       name: '登录页',
       component: Login,
+      invisible: true
+    },
+    {
+      path: '/register',
+      name: '注册页',
+      component: Register,
       invisible: true
     },
     {
@@ -47,39 +66,39 @@ export default new Router({
           path: '/music',
           name: '音乐',
           component: RouteView,
-          icon: 'dashboard',
+          icon: 'caret-right',
           children: [
             {
               path: '/music/musicList',
               name: '音乐列表',
               component: () => import('@/pages/music/MusicList'),
-              icon: 'none'
-            },
-            {
-              path: '/music/musicPlay',
-              name: '音乐播放',
-              component: () => import('@/pages/music/MusicPlay'),
-              icon: 'none'
+              icon: 'cloud'
             },
             {
               path: '/music/musicSearch',
               name: '音乐搜索',
-              component: () => import('@/pages/music/musicSearch'),
-              icon: 'none'
+              component: () => import('@/pages/music/MusicSearch'),
+              icon: 'search'
             }
           ]
         },
         {
-          path: '/setting',
-          name: '设置',
+          path: '/personal',
+          name: '我的',
           component: RouteView,
-          icon: 'setting',
+          icon: 'home',
           children: [
             {
-              path: '/setting/personal',
-              name: '个人中心',
-              component: () => import('@/pages/setting/Personal'),
-              icon: 'none'
+              path: '/personal/pmusic',
+              name: '个人音乐',
+              component: () => import('@/pages/personal/PMusic'),
+              icon: 'heart'
+            },
+            {
+              path: '/personal/setting',
+              name: '设置',
+              component: () => import('@/pages/personal/Settings'),
+              icon: 'setting'
             }
           ]
         }

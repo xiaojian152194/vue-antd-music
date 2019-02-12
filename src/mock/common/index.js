@@ -29,7 +29,7 @@ const logos = [
   'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'
 ]
 
-const admins = ['xiaojian']
+const admins = ['未登陆']
 
 const groups = ['高逼格设计天团', '中二少女团', '科学搬砖组', '骗你学计算机', '程序员日常']
 
