@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import RouteView from '@/layouts/RouteView'
 import MenuView from '@/layouts/MenuView'
 import Login from '@/pages/login/Login'
+import Register from '@/pages/login/Register'
 
 Vue.use(Router)
 
@@ -25,6 +26,12 @@ export default new Router({
       path: '/login',
       name: '登录页',
       component: Login,
+      invisible: true
+    },
+    {
+      path: '/register',
+      name: '注册页',
+      component: Register,
       invisible: true
     },
     {

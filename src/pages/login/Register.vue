@@ -11,7 +11,7 @@
       <div class="login">
         <a-form @submit="onSubmit" :autoFormCreate="(form) => this.form = form">
           <a-tabs size="large" :tabBarStyle="{textAlign: 'left'}" style="padding: 0 2px;">
-            <a-tab-pane tab="账户密码登录" key="1">
+            <a-tab-pane tab="用户注册" key="1">
               <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
               <a-form-item
                 fieldDecoratorId="name"
@@ -31,38 +31,38 @@
               </a-form-item>
             </a-tab-pane>
             <!--<a-tab-pane tab="手机号登录" key="2">-->
-              <!--<a-form-item>-->
-                <!--<a-input size="large" placeholder="手机号" >-->
-                  <!--<a-icon slot="prefix" type="mobile" />-->
-                <!--</a-input>-->
-              <!--</a-form-item>-->
-              <!--<a-form-item>-->
-                <!--<a-row :gutter="8" style="margin: 0 -4px">-->
-                  <!--<a-col :span="16">-->
-                    <!--<a-input size="large" placeholder="验证码">-->
-                    <!--<a-icon slot="prefix" type="mail" />-->
-                  <!--</a-input>-->
-                  <!--</a-col>-->
-                  <!--<a-col :span="8" style="padding-left: 4px">-->
-                    <!--<a-button style="width: 100%" class="captcha-button" size="large">获取验证码</a-button>-->
-                  <!--</a-col>-->
-                <!--</a-row>-->
-              <!--</a-form-item>-->
+            <!--<a-form-item>-->
+            <!--<a-input size="large" placeholder="手机号" >-->
+            <!--<a-icon slot="prefix" type="mobile" />-->
+            <!--</a-input>-->
+            <!--</a-form-item>-->
+            <!--<a-form-item>-->
+            <!--<a-row :gutter="8" style="margin: 0 -4px">-->
+            <!--<a-col :span="16">-->
+            <!--<a-input size="large" placeholder="验证码">-->
+            <!--<a-icon slot="prefix" type="mail" />-->
+            <!--</a-input>-->
+            <!--</a-col>-->
+            <!--<a-col :span="8" style="padding-left: 4px">-->
+            <!--<a-button style="width: 100%" class="captcha-button" size="large">获取验证码</a-button>-->
+            <!--</a-col>-->
+            <!--</a-row>-->
+            <!--</a-form-item>-->
             <!--</a-tab-pane>-->
           </a-tabs>
           <!--<div>-->
-            <!--<a-checkbox :checked="true" >自动登录</a-checkbox>-->
-            <!--<a style="float: right">忘记密码</a>-->
+          <!--<a-checkbox :checked="true" >自动登录</a-checkbox>-->
+          <!--<a style="float: right">忘记密码</a>-->
           <!--</div>-->
           <a-form-item>
-            <a-button :loading="logging" style="width: 100%;margin-top: 24px" size="large" htmlType="submit" type="primary">登录</a-button>
+            <a-button :loading="logging" style="width: 100%;margin-top: 24px" size="large" htmlType="submit" type="primary">注册</a-button>
           </a-form-item>
           <div>
             <!--其他登录方式-->
             <!--<a-icon class="icon" type="alipay-circle" />-->
             <!--<a-icon class="icon" type="taobao-circle" />-->
             <!--<a-icon class="icon" type="weibo-circle" />-->
-            <router-link style="float: right" to="/register" >注册账户</router-link>
+            <router-link style="float: right" to="/login" >返回登陆</router-link>
           </div>
         </a-form>
       </div>
@@ -73,10 +73,9 @@
 
 <script>
 import GlobalFooter from '../../layouts/GlobalFooter'
-// import dataService from '@/services/dataService'
 
 export default {
-  name: 'Login',
+  name: 'register',
   components: {GlobalFooter},
   data () {
     return {
@@ -108,8 +107,7 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.logging = true
-          // let token = dataService.getToken()
-          this.$axios.post('fg/login', {
+          this.$axios.post('fg/register', {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
           }).then((res) => {
@@ -117,8 +115,8 @@ export default {
             this.logging = false
             const result = res.data
             if (result.id !== null) {
-              this.$message.success('登陆成功!')
-              this.$router.push('/music/musicList')
+              this.$message.success('注册成功!')
+              this.$router.push('/login')
             } else {
               this.error = result.message
             }

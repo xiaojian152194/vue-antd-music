@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 
-let TOKEN_KEY = 'nmxpsoft-api-token'
+let TOKEN_KEY = 'music-api-token'
 let dataService = {}
 
 dataService.setData = function (key, values) {
