@@ -74,7 +74,7 @@
 <script>
 import GlobalFooter from '../../layouts/GlobalFooter'
 // import dataService from '@/services/dataService'
-
+import { mapState } from 'vuex'
 export default {
   name: 'Login',
   components: {GlobalFooter},
@@ -100,7 +100,10 @@ export default {
     },
     design () {
       return this.$store.state.setting.design
-    }
+    },
+    ...mapState({
+      loginState: state => state.music_login_store.currentUser
+    })
   },
   methods: {
     onSubmit (e) {
@@ -109,23 +112,38 @@ export default {
         if (!err) {
           this.logging = true
           // let token = dataService.getToken()
-          this.$axios.post('fg/login', {
+          let context = {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
-          }).then((res) => {
-            debugger
-            this.logging = false
-            const result = res.data
-            if (result.id !== null) {
-              this.$message.success('登陆成功!')
-              this.$router.push('/music/musicList')
-            } else {
-              this.error = result.message
-            }
-          })
+          }
+          this.$store.dispatch('music_login_store/GET_USER_LOGIN', context)
+          // this.$axios.post('fg/login', {
+          //   username: this.form.getFieldValue('name'),
+          //   password: this.form.getFieldValue('password')
+          // }).then((res) => {
+          //   debugger
+          //   this.logging = false
+          //   const result = res.data
+          //   if (result.id !== null) {
+          //     this.$message.success('登陆成功!')
+          //     this.$router.push('/music/musicList')
+          //   } else {
+          //     this.error = result.message
+          //   }
+          // })
           this.logging = false
         }
       })
+    }
+  },
+  watch: {
+    loginState (state) {
+      if (state.state === 'error') {
+        this.$message.warning('登陆错误！！')
+      } else if (state.state === 'success') {
+        this.$router.push('/music/musicList')
+        this.$message.success('登陆成功！欢迎回来 ' + state.nickname)
+      }
     }
   }
 }

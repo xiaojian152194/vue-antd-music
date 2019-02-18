@@ -11,7 +11,7 @@ import axios from 'axios'
 import util from '@/utils/utils'
 import '@/mock'
 import store from './store'
-import PouchDB from 'pouchdb'
+// import PouchDB from 'pouchdb'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
@@ -38,11 +38,11 @@ new Vue({
   store,
   render: h => h(App),
   components: { App },
-  template: '<App/>',
-  mounted () {
-    var db = new PouchDB('admindb')
-    db.get('currUser').then(doc => {
-      this.$store.commit('account/setuser', doc.user)
-    })
-  }
+  template: '<App/>'
+  // mounted () {
+  //   var db = new PouchDB('admindb')
+  //   db.get('currUser').then(doc => {
+  //     this.$store.commit('account/setuser', doc.user)
+  //   })
+  // }
 })
