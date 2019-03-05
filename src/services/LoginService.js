@@ -10,7 +10,7 @@ const LoginService = {
   login: (accountData) => {
     return baseService({
       method: 'post',
-      url: 'fg/login',
+      url: 'fg/user/login',
       data: accountData
     })
   },

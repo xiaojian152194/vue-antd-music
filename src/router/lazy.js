@@ -92,13 +92,19 @@ export default new Router({
               path: '/personal/pmusic',
               name: '个人音乐',
               component: () => import('@/pages/personal/PMusic'),
-              icon: 'heart'
+              icon: 'heart',
+              meta: {
+                requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+              }
             },
             {
               path: '/personal/setting',
               name: '设置',
               component: () => import('@/pages/personal/Settings'),
-              icon: 'setting'
+              icon: 'setting',
+              meta: {
+                requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+              }
             }
           ]
         }

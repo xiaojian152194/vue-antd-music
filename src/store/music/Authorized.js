@@ -38,8 +38,9 @@ const Authorized = {
     GET_USER_LOGIN: ({dispatch, commit, state, rootState, rootGetters}, context) => {
       commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'start'})
       LoginService.login(context).then(function (response) {
-        if (response.data) {
-          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'success', ...response.data})
+        // debugger
+        if (response.data.successResponse === true) {
+          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'success', ...response.data.datas[0]})
         } else {
           commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'error', ...response.data})
         }

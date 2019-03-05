@@ -107,18 +107,18 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.logging = true
-          this.$axios.post('fg/register', {
+          this.$axios.post('fg/user/register', {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
           }).then((res) => {
             debugger
             this.logging = false
             const result = res.data
-            if (result.id !== null) {
+            if (result.code === 200) {
               this.$message.success('注册成功!')
               this.$router.push('/login')
             } else {
-              this.error = result.message
+              this.$message.warning(result.message)
             }
           })
           this.logging = false

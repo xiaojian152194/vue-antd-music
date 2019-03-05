@@ -9,6 +9,21 @@ import LoginStore from '@/store/music/Authorized'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  state: {
+    token: '',
+    userID: ''
+  },
+  mutations: {
+    addToken (state, token) { // 第一个参数为 state 用于变更状态 登录
+      sessionStorage.setItem('token', token)
+      state.token = token
+    },
+    removeToken (state, token) { // 退出登录
+      sessionStorage.removeItem('token', token)
+
+      state.token = token
+    }
+  },
   modules: {
     // account,
     setting
