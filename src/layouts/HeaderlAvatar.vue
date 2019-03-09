@@ -20,7 +20,7 @@
         </router-link>
       </a-menu-item>
       <a-menu-divider />
-      <a-menu-item>
+      <a-menu-item @click="logout">
         <router-link to="/login">
         <a-icon type="poweroff" />
         <span>退出登录</span>
@@ -37,6 +37,12 @@ export default {
   computed: {
     currUser () {
       return this.$store.state.music_login_store.currentUser
+    }
+  },
+  methods: {
+    logout () {
+      // debugger
+      this.$store.dispatch('music_login_store/LOGOUT')
     }
   }
 }

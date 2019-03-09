@@ -116,7 +116,7 @@ export default {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
           }
-          this.$store.dispatch('music_login_store/GET_USER_LOGIN', context)
+          this.$store.dispatch('music_login_store/LOGIN', context)
           // this.$store.dispatch('userLogin', true)
           // localStorage.setItem('Flag', 'isLogin')
           // this.$axios.post('fg/login', {
@@ -140,12 +140,14 @@ export default {
   },
   watch: {
     loginState (state) {
+      // debugger
       if (state.state === 'error') {
         this.$message.warning(state.message)
       } else if (state.state === 'success') {
         this.$router.push('/music/musicList')
         this.$message.success('登陆成功！欢迎来到 ' + state.nickname + '的音乐网站！')
-        // this.$store.commit('ADD_COUNT', this.currentUser.session_id)
+        // debugger
+        // this.$store.commit('addToken', this.currentUser.session_id)
       }
     }
   }

@@ -12,7 +12,50 @@ const Authorized = {
     }
   },
   mutations: {
-    CHANGE_FETCH_CURRENT_USER_STATE (state, payload) {
+    USER_LOGIN_STATE (state, payload) {
+      if (payload.state === 'success') {
+        // debugger
+        state.currentUser = payload
+        // if (payload.songs[0].ar.length > 0) {
+        //   debugger
+        //   var author
+        //   payload.songs[0].ar.forEach(function (value) {
+        //     author = value.name
+        //   })
+        //   state.fetchedAuthorList = author || []
+        // } else {
+        //   state.fetchedAuthorList = payload.songs[0].ar || []
+        // }
+
+        // state.fetchedCurrentPage = payload.pageNumber || 1
+        // state.fetchedTotalCount = payload.totalCount || 0
+      } else {
+        state.currentUser = payload
+      }
+    },
+    GET_USER_LOGIN_STATE (state, payload) {
+      // debugger
+      if (payload.state === 'success') {
+        // debugger
+        state.currentUser = payload
+        // if (payload.songs[0].ar.length > 0) {
+        //   debugger
+        //   var author
+        //   payload.songs[0].ar.forEach(function (value) {
+        //     author = value.name
+        //   })
+        //   state.fetchedAuthorList = author || []
+        // } else {
+        //   state.fetchedAuthorList = payload.songs[0].ar || []
+        // }
+
+        // state.fetchedCurrentPage = payload.pageNumber || 1
+        // state.fetchedTotalCount = payload.totalCount || 0
+      } else {
+        state.currentUser = payload
+      }
+    },
+    LOGOUT_STATE (state, payload) {
       if (payload.state === 'success') {
         // debugger
         state.currentUser = payload
@@ -35,20 +78,54 @@ const Authorized = {
     }
   },
   actions: {
-    GET_USER_LOGIN: ({dispatch, commit, state, rootState, rootGetters}, context) => {
-      commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'start'})
-      LoginService.login(context).then(function (response) {
-        // debugger
+    GET_USER_LOGIN: ({dispatch, commit, state, rootState, rootGetters}) => {
+      commit('GET_USER_LOGIN_STATE', {state: 'start'})
+      LoginService.getUser().then(function (response) {
+        debugger
         if (response.data.successResponse === true) {
-          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'success', ...response.data.datas[0]})
+          commit('GET_USER_LOGIN_STATE', {state: 'success', ...response.data.datas[0]})
         } else {
-          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'error', ...response.data})
+          commit('GET_USER_LOGIN_STATE', {state: 'error', ...response.data})
         }
       }).catch(function (response) {
         if (response instanceof Error) {
-          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'error', ...response.data})
+          commit('GET_USER_LOGIN_STATE', {state: 'error', ...response.data})
         } else {
-          commit('CHANGE_FETCH_CURRENT_USER_STATE', {state: 'error', ...response.data})
+          commit('GET_USER_LOGIN_STATE', {state: 'error', ...response.data})
+        }
+      })
+    },
+    LOGIN: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      commit('USER_LOGIN_STATE', {state: 'start'})
+      LoginService.login(context).then(function (response) {
+        // debugger
+        if (response.data.successResponse === true) {
+          commit('USER_LOGIN_STATE', {state: 'success', ...response.data.datas[0]})
+        } else {
+          commit('USER_LOGIN_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('USER_LOGIN_STATE', {state: 'error', ...response.data})
+        } else {
+          commit('USER_LOGIN_STATE', {state: 'error', ...response.data})
+        }
+      })
+    },
+    LOGOUT: ({dispatch, commit, state, rootState, rootGetters}) => {
+      commit('LOGOUT_STATE', {state: 'start'})
+      LoginService.logout().then(function (response) {
+        // debugger
+        if (response.data.successResponse === true) {
+          commit('LOGOUT_STATE', {state: 'success', ...response.data.datas[0]})
+        } else {
+          commit('LOGOUT_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('LOGOUT_STATE', {state: 'error', ...response.data})
+        } else {
+          commit('LOGOUT_STATE', {state: 'error', ...response.data})
         }
       })
     }

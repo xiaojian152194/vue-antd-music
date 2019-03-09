@@ -111,7 +111,7 @@ export default {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
           }).then((res) => {
-            debugger
+            // debugger
             this.logging = false
             const result = res.data
             if (result.code === 200) {

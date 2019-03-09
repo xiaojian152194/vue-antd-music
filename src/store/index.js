@@ -15,6 +15,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     addToken (state, token) { // 第一个参数为 state 用于变更状态 登录
+      // debugger
       sessionStorage.setItem('token', token)
       state.token = token
     },
