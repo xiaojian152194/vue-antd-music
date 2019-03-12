@@ -1,8 +1,8 @@
 const config = {
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
-    title: '403',
-    desc: '抱歉，你无权访问该页面'
+    title: '尚未登陆',
+    desc: '抱歉，你无权访问该页面请登录后访问'
   },
   404: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
-      <router-link slot="play" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">
+      <router-link slot="play" slot-scope="text" :to="{path:'/personal/myMusicPlay', query:{music_id: text}}">
         <a-icon type="play-circle" style="margin-left: 7px"/>
       </router-link>
       <!--<a slot="play" slot-scope="text" @click="getMusicUrl(text)">{{text}}-->
@@ -13,7 +13,7 @@
 <script>
 import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
-  name: 'MusicListTable',
+  name: 'MyMusicListTable',
   props: {
     'musicList': {
       default: function () {
@@ -46,9 +46,8 @@ export default {
         //   }
         // },
         {title: '播放', dataIndex: 'id', width: '8%', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'name', width: '45%', sortable: 'true'},
-        {title: '专辑', dataIndex: 'alia[0]', width: '30%', sortable: 'true'},
-        {title: '歌手', dataIndex: 'ar[0].name', width: '27%', sortable: 'true'}
+        {title: '标题', dataIndex: 'musicName', width: '77%', sortable: 'true'},
+        {title: '大小', dataIndex: 'musicSize', width: '15%', sortable: 'true'}
       ]
     }
   },

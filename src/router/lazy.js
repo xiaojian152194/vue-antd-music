@@ -23,6 +23,18 @@ export default new Router({
       ]
     },
     {
+      path: '/personal',
+      component: MenuView,
+      invisible: true,
+      children: [
+        {
+          path: '/personal/myMusicPlay',
+          name: '我的音乐播放',
+          component: () => import('@/pages/personal/PMusicPlay')
+        }
+      ]
+    },
+    {
       path: '/login',
       name: '登录页',
       component: Login,
@@ -251,7 +263,7 @@ export default new Router({
         //       component: () => import('@/pages/exception/500')
         //     }
         //   ]
-        // },
+        // }
         // {
         //   path: '/components',
         //   redirect: '/components/taskcard',

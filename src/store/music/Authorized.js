@@ -81,7 +81,7 @@ const Authorized = {
     GET_USER_LOGIN: ({dispatch, commit, state, rootState, rootGetters}) => {
       commit('GET_USER_LOGIN_STATE', {state: 'start'})
       LoginService.getUser().then(function (response) {
-        debugger
+        // debugger
         if (response.data.successResponse === true) {
           commit('GET_USER_LOGIN_STATE', {state: 'success', ...response.data.datas[0]})
         } else {

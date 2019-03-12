@@ -5,6 +5,7 @@ import setting from './modules/setting'
 import MusicListStore from '@/store/music/MusicListStore'
 import MusicUrlStore from '@/store/music/MusicUrlStore'
 import LoginStore from '@/store/music/Authorized'
+import MyMusicStore from '@/store/music/MyMusicStore'
 
 Vue.use(Vuex)
 
@@ -34,5 +35,6 @@ const store = new Vuex.Store({
 store.registerModule('music_list_store', MusicListStore)
 store.registerModule('music_url_store', MusicUrlStore)
 store.registerModule('music_login_store', LoginStore)
+store.registerModule('my_music_store', MyMusicStore)
 
 export default store
