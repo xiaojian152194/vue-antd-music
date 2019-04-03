@@ -55,6 +55,7 @@ export default {
       this.$set(this, 'musicUrl', {})
       this.$set(this, 'author', {})
       this.$set(this, 'lrc', {})
+      this.$store.dispatch('music_login_store/GET_USER_LOGIN')
       this.$store.dispatch('music_url_store/FETCH_MUSIC_URL', this.$route.query.music_id)
       this.$store.dispatch('music_url_store/FETCH_MUSIC_LRC', this.$route.query.music_id)
     }

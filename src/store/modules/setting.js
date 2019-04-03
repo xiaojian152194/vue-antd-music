@@ -3,7 +3,7 @@ export default {
   state: {
     isMobile: false,
     theme: 'dark',
-    layout: 'side',
+    layout: 'head',
     systemName: 'P Cloud Music',
     copyright: '123',
     design: 'design by xiaojian',

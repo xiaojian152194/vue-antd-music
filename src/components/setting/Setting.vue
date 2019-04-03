@@ -21,8 +21,8 @@
     <a-divider/>
     <setting-item title="导航设置">
       <img-checkbox-group @change="setLayout">
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" value="side"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" :checked="true" value="head"/>
       </img-checkbox-group>
     </setting-item>
     <!--<setting-item>-->

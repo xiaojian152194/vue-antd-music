@@ -1,11 +1,11 @@
 <template>
   <div>
     <!--<aplayer :audio="audio" :lrcType="3" />-->
-    <aplayer :showLrc = false :music = "{
+    <aplayer :showLrc = true :music = "{
         title: this.myMusic.musicName,
         artist: '我的音乐',
-        src: 'http://localhost:9090/' + this.myMusic.musicRealName,
-        pic: 'http://localhost:9090/static/img/1.png'
+        src: 'http://39.106.44.210:9090/' + this.myMusic.musicRealName,
+        pic: 'http://39.106.44.210:9090/static/img/1.png'
       }"
     />
   </div>
@@ -43,6 +43,7 @@ export default {
       // this.$set(this, 'musicUrl', {})
       // this.$set(this, 'author', {})
       // this.$set(this, 'lrc', {})
+      this.$store.dispatch('music_login_store/GET_USER_LOGIN')
       this.$store.dispatch('my_music_store/FETCH_MY_MUSIC', this.$route.query.music_id)
       // this.$store.dispatch('music_url_store/FETCH_MUSIC_LRC', this.$route.query.music_id)
     }

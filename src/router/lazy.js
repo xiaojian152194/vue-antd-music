@@ -76,7 +76,7 @@ export default new Router({
         // },
         {
           path: '/music',
-          name: '音乐',
+          name: '音乐曲库（网易云音乐）',
           component: RouteView,
           icon: 'caret-right',
           children: [
@@ -96,7 +96,7 @@ export default new Router({
         },
         {
           path: '/personal',
-          name: '我的',
+          name: '个人中心',
           component: RouteView,
           icon: 'home',
           children: [

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card>
-      <a-upload-dragger v-if="userState.nickname" name="music" :multiple="true" action="http://localhost:9090/fg/music/upload" @change="handleChange" >
+      <a-upload-dragger v-if="userState.nickname" name="music" :multiple="true" action="http://39.106.44.210:9090/fg/music/upload" @change="handleChange" >
         <p class="ant-upload-drag-icon">
           <a-icon type="inbox" />
         </p>

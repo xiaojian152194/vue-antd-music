@@ -5,142 +5,21 @@ const MyMusicStore = {
   namespaced: true,
   state () {
     return {
-      idAttribute: 'musicListId',
+      idAttribute: 'myMusicListId',
 
-      savingState: 'no',
-      savingErrorMessage: null,
-      savedObjects: null,
-
-      fetchPageSize: 25,
-      fetchSearchKey: null,
-      fetchSort: null,
-      fetchParameters: null,
-      fetchingListState: 'no',
-      fetchingListErrorMessage: null,
       fetchedList: [],
-      myMusic: {},
-      fetchedCurrentPage: 1,
-      fetchedTotalCount: 0,
-      dynamicFetch: {},
-
-      destroyingState: 'no',
-      destroyingErrorMessage: null,
-      submittingState: 'no',
-      submittingErrorMessage: null,
-
-      loadingUpdateState: 'no',
-      loadingUpdateErrorMessage: null,
-      currentUpdateObject: {},
-      loadingDisplayState: 'no',
-      loadingDisplayErrorMessage: null,
-      currentDisplayObject: {},
-
-      getCheckInfoState: 'no',
-      getCheckInfoErrorMessage: null,
-      checkInfo: {},
-
-      checkState: 'no',
-      checkErrorMessage: null
-    }
-  },
-  getters: {
-    getDynamicFetchedLoading: (state) => (dynamicFetchKey) => {
-      if (state.dynamicFetch[dynamicFetchKey]) {
-        return state.dynamicFetch[dynamicFetchKey].fetchingListState === 'start'
-      }
-      return false
-    },
-    getDynamicFetchedData: (state) => (dynamicFetchKey) => {
-      if (state.dynamicFetch[dynamicFetchKey]) {
-        return state.dynamicFetch[dynamicFetchKey].fetchedList
-      }
-      return {}
+      myMusic: {}
     }
   },
   mutations: {
-    CHANGE_SAVE_STATE (state, payload) {
-      state.savingState = payload.state
-      state.savingErrorMessage = payload.message
-      state.savedObjects = payload.savedObjects
-    },
-    CHANGE_FETCH_PAGE_PARAMETER (state, payload) {
-      if (payload.isDynamicFetch === true && payload.dynamicFetchKey && payload.dynamicFetchKey !== '') {
-        if (!state.dynamicFetch[payload.dynamicFetchKey]) {
-          Vue.set(state.dynamicFetch, payload.dynamicFetchKey, {})
-        }
-        if (payload.pageSize) {
-          Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchPageSize', payload.pageSize)
-        }
-        if (payload.currentPage) {
-          Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchedCurrentPage', payload.currentPage)
-        }
-      } else {
-        if (payload.pageSize) {
-          state.fetchPageSize = payload.pageSize
-        }
-        if (payload.currentPage) {
-          state.fetchedCurrentPage = payload.currentPage
-        }
-      }
-    },
-    CHANGE_FETCH_PARAMETER (state, payload) {
-      if (payload.isDynamicFetch === true && payload.dynamicFetchKey && payload.dynamicFetchKey !== '') {
-        if (!state.dynamicFetch[payload.dynamicFetchKey]) {
-          Vue.set(state.dynamicFetch, payload.dynamicFetchKey, {})
-        }
-        if (payload.parameter) {
-          Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchParameters', payload.parameter)
-        }
-        if (payload.searchKey || payload.searchKey === '') {
-          Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchSearchKey', payload.searchKey)
-        }
-        if (payload.sort) {
-          Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchSort', payload.sort)
-        }
-      } else {
-        if (payload.parameter) {
-          state.fetchParameters = payload.parameter
-        }
-        if (payload.searchKey || payload.searchKey === '') {
-          state.fetchSearchKey = payload.searchKey
-        }
-        if (payload.sort) {
-          state.fetchSort = payload.sort
-        }
-      }
-    },
     FETCH_MY_MUSIC_LIST_STATE (state, payload) {
       if (payload.state === 'success') {
         state.fetchedList = payload || []
-        // state.fetchedCurrentPage = payload.pageNumber || 1
-        // state.fetchedTotalCount = payload.totalCount || 0
       }
-      // if (payload.isDynamicFetch === true && payload.dynamicFetchKey && payload.dynamicFetchKey !== '') {
-      //   if (!state.dynamicFetch[payload.dynamicFetchKey]) {
-      //     Vue.set(state.dynamicFetch, payload.dynamicFetchKey, {})
-      //   }
-      //   Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchingListState', payload.state)
-      //   if (payload.state === 'error') { Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchingListErrorMessage', payload.message) }
-      //   if (payload.state === 'success') {
-      //     Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchedList', payload.datas || [])
-      //     Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchedCurrentPage', payload.pageNumber || 1)
-      //     Vue.set(state.dynamicFetch[payload.dynamicFetchKey], 'fetchedTotalCount', payload.totalCount || 0)
-      //   }
-      // } else {
-      //   state.fetchingListState = payload.state
-      //   if (payload.state === 'error') { state.fetchingListErrorMessage = payload.message }
-      //   if (payload.state === 'success') {
-      //     state.fetchedList = payload.datas || []
-      //     state.fetchedCurrentPage = payload.pageNumber || 1
-      //     state.fetchedTotalCount = payload.totalCount || 0
-      //   }
-      // }
     },
     UPLOAD_MUSIC_STATE (state, payload) {
       if (payload.state === 'success') {
         state.fetchedList = payload.result || []
-        // state.fetchedCurrentPage = payload.pageNumber || 1
-        // state.fetchedTotalCount = payload.totalCount || 0
       }
     },
     FETCH_MY_MUSIC_STATE (state, payload) {
