@@ -4,8 +4,8 @@
     <aplayer :showLrc = true :music = "{
         title: this.myMusic.musicName,
         artist: '我的音乐',
-        src: 'http://39.106.44.210:9090/' + this.myMusic.musicRealName,
-        pic: 'http://39.106.44.210:9090/static/img/1.png'
+        src: 'http://localhost:9090/' + this.myMusic.musicRealName,
+        pic: 'http://localhost:9090/static/img/1.png'
       }"
     />
   </div>

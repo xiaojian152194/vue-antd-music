@@ -16,6 +16,7 @@ const Authorized = {
       if (payload.state === 'success') {
         // debugger
         state.currentUser = payload
+        state.UserLogin = 'yes'
         // if (payload.songs[0].ar.length > 0) {
         //   debugger
         //   var author
@@ -38,6 +39,7 @@ const Authorized = {
       if (payload.state === 'success') {
         // debugger
         state.currentUser = payload
+        state.UserLogin = 'yes'
         // if (payload.songs[0].ar.length > 0) {
         //   debugger
         //   var author
@@ -57,7 +59,6 @@ const Authorized = {
     },
     LOGOUT_STATE (state, payload) {
       if (payload.state === 'success') {
-        // debugger
         state.currentUser = payload
         // if (payload.songs[0].ar.length > 0) {
         //   debugger
@@ -100,7 +101,7 @@ const Authorized = {
       LoginService.login(context).then(function (response) {
         // debugger
         if (response.data.successResponse === true) {
-          commit('USER_LOGIN_STATE', {state: 'success', ...response.data.datas[0]})
+          commit('USER_LOGIN_STATE', {state: 'success', ...response.data})
         } else {
           commit('USER_LOGIN_STATE', {state: 'error', ...response.data})
         }
@@ -115,9 +116,8 @@ const Authorized = {
     LOGOUT: ({dispatch, commit, state, rootState, rootGetters}) => {
       commit('LOGOUT_STATE', {state: 'start'})
       LoginService.logout().then(function (response) {
-        // debugger
         if (response.data.successResponse === true) {
-          commit('LOGOUT_STATE', {state: 'success', ...response.data.datas[0]})
+          commit('LOGOUT_STATE', {state: 'success', ...response.data})
         } else {
           commit('LOGOUT_STATE', {state: 'error', ...response.data})
         }
@@ -126,6 +126,23 @@ const Authorized = {
           commit('LOGOUT_STATE', {state: 'error', ...response.data})
         } else {
           commit('LOGOUT_STATE', {state: 'error', ...response.data})
+        }
+      })
+    },
+    REGISTER: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      commit('GET_USER_LOGIN_STATE', {state: 'start'})
+      LoginService.register(context).then(function (response) {
+        debugger
+        if (response.data.successResponse === true) {
+          commit('REGISTER_STATE', {state: 'success', ...response.data})
+        } else {
+          commit('REGISTER_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('REGISTER_STATE', {state: 'error', ...response.data})
+        } else {
+          commit('REGISTER_STATE', {state: 'error', ...response.data})
         }
       })
     }

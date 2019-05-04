@@ -111,7 +111,6 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.logging = true
-          // let token = dataService.getToken()
           let context = {
             username: this.form.getFieldValue('name'),
             password: this.form.getFieldValue('password')
@@ -140,14 +139,15 @@ export default {
   },
   watch: {
     loginState (state) {
-      // debugger
       if (state.state === 'error') {
         this.$message.warning(state.message)
       } else if (state.state === 'success') {
+        this.$store.commit('addToken', this.loginState.requestId)
+        this.$store.commit('SET_ROLES', this.loginState.roles)
         this.$router.push('/music/musicList')
-        this.$message.success('登陆成功！欢迎来到 ' + state.nickname + '的音乐网站！')
-        // debugger
-        // this.$store.commit('addToken', this.currentUser.session_id)
+        this.$message.success('登陆成功!')
+        // let token = dataService.getToken()
+        // this.$store.commit('addToken', token)
       }
     }
   }

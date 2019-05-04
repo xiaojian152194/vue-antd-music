@@ -2,8 +2,8 @@
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
       <img-checkbox-group @change="setTheme">
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg"  value="dark"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :checked="true" value="light"/>
       </img-checkbox-group>
     </setting-item>
     <!--<setting-item title="主题色">-->
@@ -21,8 +21,8 @@
     <a-divider/>
     <setting-item title="导航设置">
       <img-checkbox-group @change="setLayout">
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" value="side"/>
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" :checked="true" value="head"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
     </setting-item>
     <!--<setting-item>-->

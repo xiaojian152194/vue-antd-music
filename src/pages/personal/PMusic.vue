@@ -1,7 +1,8 @@
+<!--suppress ALL -->
 <template>
   <div>
     <a-card>
-      <a-upload-dragger v-if="userState.nickname" name="music" :multiple="true" action="http://39.106.44.210:9090/fg/music/upload" @change="handleChange" >
+      <a-upload-dragger v-if="userState.username" name="music" :multiple="true" action="http://localhost:9090/fg/music/upload" @change="handleChange" >
         <p class="ant-upload-drag-icon">
           <a-icon type="inbox" />
         </p>
@@ -10,9 +11,9 @@
       </a-upload-dragger>
     </a-card>
     <a-card >
-      <a-input-search v-if="userState.nickname"
+      <a-input-search v-if="userState.username"
         style="width: 230px"
-        placeholder="音乐搜索"
+        placeholder="请输入歌曲名"
         @search="onSearch"
         enterButton
       />
@@ -25,28 +26,30 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import PMusicDisplay from './PMusicDisplay'
 import ExceptionPage from '../../components/exception/ExceptionPage'
 export default {
   name: 'MusicList',
   components: {PMusicDisplay, ExceptionPage},
   computed: {
-    ...mapGetters([
-      'getToken'
-    ]),
     ...mapState({
       musicList: state => state.my_music_store.fetchedList,
-      userState: state => state.music_login_store.currentUser
+      userState: state => state.music_login_store.currentUser,
+      musicDestroyingState: state => state.my_music_store.destroyingState,
+      musicDestroyingErrorMessage: state => state.my_music_store.destroyingErrorMessage
     })
   },
   methods: {
     initializeFetch () {
       this.$store.dispatch('music_login_store/GET_USER_LOGIN')
-      // this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
     },
     onSearch (value) {
-      this.$router.push({path: '/music/musicSearch', query: {keyWorlds: value}})
+      let musicSearch = {
+        likeMusicName: value,
+        userId: this.userState.id
+      }
+      this.$store.dispatch('my_music_store/SEARCH_MY_MUSIC', musicSearch)
     },
     handleChange (info) {
       // this.$store.dispatch('my_music_store/UPLOAD_MUSIC' + info.file)
@@ -55,8 +58,12 @@ export default {
         console.log(info.file, info.fileList)
       }
       if (status === 'done') {
+        debugger
         this.$message.success(`${info.file.name} 音乐上传成功.`)
-        this.$store.dispatch('my_music_store/FETCH_MY_MUSIC_LIST')
+        let formDate = {
+          userId: this.userState.id
+        }
+        this.$store.dispatch('my_music_store/FETCH_MY_MUSIC_LIST', formDate)
       } else if (status === 'error') {
         this.$message.error(`${info.file.name} 音乐上传失败.`)
       }
@@ -68,7 +75,22 @@ export default {
       //   this.$message.warning('尚未登陆，请登陆！')
       if (state.state === 'success') {
         this.$message.success(' 加载成功!')
-        this.$store.dispatch('my_music_store/FETCH_MY_MUSIC_LIST')
+        let formDate = {
+          userId: this.userState.id
+        }
+        this.$store.dispatch('my_music_store/FETCH_MY_MUSIC_LIST', formDate)
+      }
+    },
+    musicDestroyingState (state) {
+      if (state === 'success') {
+        this.$message.success('音乐删除成功')
+        let formDate = {
+          userId: this.userState.id
+        }
+        this.$store.dispatch('my_music_store/FETCH_MY_MUSIC_LIST', formDate)
+      }
+      if (state === 'error') {
+        this.$message.error(this.musicDestroyingErrorMessage)
       }
     }
   },

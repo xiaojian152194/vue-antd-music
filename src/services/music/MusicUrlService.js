@@ -3,11 +3,12 @@
  * Nmxpsoft and  Nmgzhigang PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 import baseService from '@/services/baseService'
+// import otherService from '@/services/otherService'
 // import dataService from '@/services/dataService'
 
 // const URL = ''
 const MusicUrlService = {
-  getMusicUrl: (musicId) => {
+  getMusicId: (musicId) => {
     return baseService('api/song/detail?ids=' + musicId, {
       method: 'get'
     })
@@ -19,6 +20,11 @@ const MusicUrlService = {
   },
   getMusicCanPlay: (musicId) => {
     return baseService('api/check/music?id=' + musicId, {
+      method: 'get'
+    })
+  },
+  getMusicUrl: (musicId) => {
+    return baseService('api/song/url?id=' + musicId, {
       method: 'get'
     })
   },

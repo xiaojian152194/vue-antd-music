@@ -1,11 +1,11 @@
 <template>
   <div>
-    <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
+    <a-table border :columns="getColumns()" :dataSource="allMusicState" ellipsis>
       <router-link slot="play" slot-scope="text" :to="{path:'/personal/myMusicPlay', query:{music_id: text}}">
         <a-icon type="play-circle" style="margin-left: 7px"/>
       </router-link>
       <!--<router-link slot="download" slot-scope="text" :to="'../fg/music/download/' + text">-->
-        <!--<a-icon type="download" style="margin-left: 7px"/>-->
+      <!--<a-icon type="download" style="margin-left: 7px"/>-->
       <!--</router-link>-->
       <a slot="download" slot-scope="text" @click="downloadMusic(text)">
         <a-icon type="download" style="margin-left: 7px"/>
@@ -22,7 +22,7 @@ import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'MyMusicListTable',
   props: {
-    'musicList': {
+    'allMusicState': {
       default: function () {
         return []
       }
@@ -39,7 +39,7 @@ export default {
   },
   data () {
     return {
-      musicListColumns: [
+      allMusicListColumns: [
         // {
         //   title: '更多',
         //   type: 'expand',
@@ -53,8 +53,11 @@ export default {
         //   }
         // },
         {title: '播放', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'musicName', minWidth: '70%', sortable: 'true'},
+        {title: '标题', dataIndex: 'musicName', minWidth: '45%', sortable: 'true'},
         {title: '大小', dataIndex: 'musicSize', sortable: 'true'},
+        {title: '上传账户', dataIndex: 'userUsername', sortable: 'true'},
+        {title: '上传时间', dataIndex: 'uploadTime', sortable: 'true', customRender: this.longTimestampRender},
+        {title: 'IP', dataIndex: 'uploadIp', sortable: 'true'},
         {title: '下载', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'download'}},
         {title: '删除', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'delete'}}
       ]
@@ -62,7 +65,7 @@ export default {
   },
   methods: {
     getColumns () {
-      return this.musicListColumns.filter((column) => {
+      return this.allMusicListColumns.filter((column) => {
         return this.executionColumns.indexOf(column.dataIndex) === -1
       })
     },
@@ -70,7 +73,6 @@ export default {
       window.location.href = `http://localhost:9090/fg/music/download/${id}`
     },
     deleteMusic (id) {
-      debugger
       let music = {
         id: id
       }

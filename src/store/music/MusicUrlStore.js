@@ -10,11 +10,12 @@ const MusicUrlStore = {
       MusicName: [],
       AuthorName: [],
       MusicPic: [],
-      MusicLrc: []
+      MusicLrc: [],
+      MusicUrl: []
     }
   },
   mutations: {
-    CHANGE_FETCH_MUSIC_URL_STATE (state, payload) {
+    CHANGE_FETCH_MUSIC_ID_STATE (state, payload) {
       if (payload.state === 'success') {
         // debugger
         state.MusicName = payload.songs[0] || []
@@ -43,10 +44,15 @@ const MusicUrlStore = {
     CHANGE_FETCH_MUSIC_CAN_PLAY_STATE (state, payload) {
       state.MusicCanPlay = payload.state
       state.checkMessage = payload.message
+    },
+    CHANGE_FETCH_MUSIC_URL_STATE (state, payload) {
+      if (payload.state === 'success') {
+        state.MusicUrl = payload.data[0] || []
+      }
     }
   },
   actions: {
-    FETCH_MUSIC_URL: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+    FETCH_MUSIC_ID: ({dispatch, commit, state, rootState, rootGetters}, context) => {
       if (state.MusicCanPlay === 'start') { return }
       commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'start'})
       MusicUrlService.getMusicCanPlay(context).then(function (response) {
@@ -62,18 +68,18 @@ const MusicUrlStore = {
           commit('CHANGE_FETCH_MUSIC_CAN_PLAY_STATE', {state: 'error', ...response.data})
         }
       })
-      commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'start'})
-      MusicUrlService.getMusicUrl(context).then(function (response) {
+      commit('CHANGE_FETCH_MUSIC_ID_STATE', {state: 'start'})
+      MusicUrlService.getMusicId(context).then(function (response) {
         if (response.data && response.data.code === 200) {
-          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'success', ...response.data})
+          commit('CHANGE_FETCH_MUSIC_ID_STATE', {state: 'success', ...response.data})
         } else {
-          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', ...response.data})
+          commit('CHANGE_FETCH_MUSIC_ID_STATE', {state: 'error', ...response.data})
         }
       }).catch(function (response) {
         if (response instanceof Error) {
-          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', message: response.message})
+          commit('CHANGE_FETCH_MUSIC_ID_STATE', {state: 'error', message: response.message})
         } else {
-          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', ...response.data})
+          commit('CHANGE_FETCH_MUSIC_ID_STATE', {state: 'error', ...response.data})
         }
       })
     },
@@ -90,6 +96,22 @@ const MusicUrlStore = {
           commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'error', message: response.message})
         } else {
           commit('CHANGE_FETCH_MUSIC_LRC_STATE', {state: 'error', ...response.data})
+        }
+      })
+    },
+    FETCH_MUSIC_URL: ({dispatch, commit, state, rootState, rootGetters}, context) => {
+      commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'start'})
+      MusicUrlService.getMusicUrl(context).then(function (response) {
+        if (response.data && response.data.code === 200) {
+          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'success', ...response.data})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', ...response.data})
+        }
+      }).catch(function (response) {
+        if (response instanceof Error) {
+          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', message: response.message})
+        } else {
+          commit('CHANGE_FETCH_MUSIC_URL_STATE', {state: 'error', ...response.data})
         }
       })
     }

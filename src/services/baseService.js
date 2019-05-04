@@ -1,21 +1,21 @@
 // import Vue from 'Vue';
 import axios from 'axios'
-import dataService from './dataService'
+// import dataService from './dataService'
 
 let baseService = axios.create({
   // baseURL: '/api',
   timeout: 8000
 })
 
-baseService.interceptors.request.use(
-  config => {
-    config.headers['music-api-token'] = dataService.getToken()
-    return config
-  },
-  error => {
-    Promise.reject(error)
-  }
-)
+// baseService.interceptors.request.use(
+//   config => {
+//     config.headers['music-api-token'] = dataService.getToken()
+//     return config
+//   },
+//   error => {
+//     Promise.reject(error)
+//   }
+// )
 
 // baseService.interceptors.response.use(
 //     response => response,

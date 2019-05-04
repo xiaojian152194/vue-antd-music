@@ -22,9 +22,22 @@ Vue.component('icon', Icon)
 /* eslint-disable no-new */
 Vue.mixin({
   methods: {
-    musicTimeFormatRender: function (h, params) {
-      let musicDt = params.row[params.column.dataIndex]
-      return h('span', util.musicTimeFormat(musicDt))
+    musicTimeFormatRender: function (musicDt) {
+      debugger
+      return util.musicTimeFormat(musicDt)
+    },
+    longTimestampRender: function (time) {
+      let longTimestamp = time
+      return util.longTimestampToString(longTimestamp)
+    },
+    haveAuthorityRender: function (auth) {
+      if (auth === 'Y') {
+        return '是'
+      } else if (auth === 'N') {
+        return '否'
+      } else {
+        return '未知'
+      }
     }
   },
   filters: {
@@ -47,17 +60,29 @@ new Vue({
   //   })
   // }
 })
-router.beforeEach((to, from, next) => {
-  store.state.token = sessionStorage.getItem('token')// 获取本地存储的token
-
+router.beforeEach(async (to, from, next) => {
+  // debugger
+  // if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+  //   if (store.state.token !== '') { // 通过vuex state获取当前的token是否存
+  //     next()
+  //   } else {
+  //     next({
+  //       path: '/login',
+  //       query: {redirect: to.fullPath} // 将跳转的路由path作为参数，登录成功后跳转到该路由
+  //     })
+  //   }
+  // } else {
+  //   next()
+  // }
+  store.state.roles = sessionStorage.getItem('roles')
   if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-    if (store.state.token !== '') { // 通过vuex state获取当前的token是否存
-      next()
-    } else {
+    if (store.state.roles !== 'admin') {
       next({
-        path: '/login',
+        path: '/personal/auth',
         query: {redirect: to.fullPath} // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
+    } else { // 通过vuex state获取当前的token是否存
+      next()
     }
   } else {
     next()

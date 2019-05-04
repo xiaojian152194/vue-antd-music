@@ -1,10 +1,11 @@
 <template>
   <div>
     <!--<aplayer :audio="audio" :lrcType="3" />-->
+    <!--'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id-->
     <aplayer :showLrc = true :music = "{
         title: this.musicName.name,
         artist: this.authorName.name,
-        src: 'http://music.163.com/song/media/outer/url?id=' + this.$route.query.music_id,
+        src: this.musicUrl.url,
         lrc: this.lrc.lyric,
         pic: this.musicPic.picUrl
       }"
@@ -17,13 +18,13 @@
 
 <script>
 // import Vue from 'vue'
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Aplayer from 'vue-aplayer'
 // Vue.use(Aplayer)
 export default {
   name: 'MusicPlay',
   components: {Aplayer},
-  data () {
+  data: function () {
     return {
       musicName: {
         name: null
@@ -36,26 +37,30 @@ export default {
       },
       lrc: {
         lyric: null
+      },
+      musicUrl: {
+        url: null
       }
     }
   },
   computed: {
-    ...mapGetters([]),
     ...mapState({
       musicState: state => state.music_url_store.MusicName,
       musicPicState: state => state.music_url_store.MusicPic,
       musicAuthorState: state => state.music_url_store.AuthorName,
       musicLrcState: state => state.music_url_store.MusicLrc,
+      musicUrlState: state => state.music_url_store.MusicUrl,
       musicCanPlayState: state => state.music_url_store.MusicCanPlay,
       musicCanPlayMessage: state => state.music_url_store.checkMessage
     })
   },
   methods: {
     initializeLoad () {
-      this.$set(this, 'musicUrl', {})
-      this.$set(this, 'author', {})
-      this.$set(this, 'lrc', {})
+      // this.$set(this, 'musicUrl', {})
+      // this.$set(this, 'author', {})
+      // this.$set(this, 'lrc', {})
       this.$store.dispatch('music_login_store/GET_USER_LOGIN')
+      this.$store.dispatch('music_url_store/FETCH_MUSIC_ID', this.$route.query.music_id)
       this.$store.dispatch('music_url_store/FETCH_MUSIC_URL', this.$route.query.music_id)
       this.$store.dispatch('music_url_store/FETCH_MUSIC_LRC', this.$route.query.music_id)
     }
@@ -89,6 +94,14 @@ export default {
       handler (curVal, oldVal) {
         if (curVal) {
           this.lrc = Object.assign({}, curVal)
+        }
+      },
+      deep: true
+    },
+    musicUrlState: {
+      handler (curVal, oldVal) {
+        if (curVal) {
+          this.musicUrl = Object.assign({}, curVal)
         }
       },
       deep: true

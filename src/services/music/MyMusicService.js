@@ -8,14 +8,32 @@ const MyMusicService = {
       method: 'get'
     })
   },
-  get: () => {
+  getUserMusic: (userId) => {
     return baseService('fg/music/get_user_musics', {
+      method: 'post',
+      data: userId
+    })
+  },
+  get: () => {
+    return baseService('fg/music', {
       method: 'get'
+    })
+  },
+  searchMusic: (music) => {
+    return baseService('fg/music/search_music', {
+      method: 'post',
+      data: music
     })
   },
   upload: (music) => {
     return baseService('fg/music/upload', {
       method: 'post',
+      data: music
+    })
+  },
+  deleteMusic: (music) => {
+    return baseService('fg/music/single', {
+      method: 'delete',
       data: music
     })
   }
