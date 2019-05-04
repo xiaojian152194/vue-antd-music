@@ -7,17 +7,23 @@ import baseService from '@/services/baseService'
 
 // const URL = ''
 const LoginService = {
+  getUser: () => {
+    return baseService({
+      method: 'get',
+      url: 'fg/user/getUser'
+    })
+  },
   login: (accountData) => {
     return baseService({
       method: 'post',
-      url: 'fg/login',
+      url: 'fg/user/login',
       data: accountData
     })
   },
   logout: () => {
     return baseService({
-      url: 'fg/logout',
-      method: 'get'
+      url: 'fg/user/logout',
+      method: 'post'
     })
   },
   register: (accountData) => {

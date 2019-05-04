@@ -1,32 +1,20 @@
 <template>
   <div class="exception">
     <div class="img">
-      <img :src="config[type].img" />
+      <img src="https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg" />
       <!--<div class="ele" :style="{backgroundImage: `url(${config[type].img})`}"/>-->
     </div>
     <div class="content">
-      <h1>{{config[type].title}}</h1>
-      <div class="desc">{{config[type].desc}}</div>
-      <div class="action">
-        <router-link :to="{path:'/login'}">
-          <a-button type="primary">前去登陆</a-button>
-        </router-link>
-      </div>
+      <h1>需要管理员身份</h1>
+      <div class="desc">抱歉，你无权访问该页面！</div>
     </div>
   </div>
 </template>
 
 <script>
-import Config from './typeConfig'
 
 export default {
-  name: 'ExceptionPage',
-  props: ['type'],
-  data () {
-    return {
-      config: Config
-    }
-  }
+  name: 'ExceptionPage'
 }
 </script>
 

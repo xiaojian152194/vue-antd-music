@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 
-let TOKEN_KEY = 'music-api-token'
+let TOKEN_KEY = 'Cookie'
 let dataService = {}
 
 dataService.setData = function (key, values) {
@@ -8,6 +8,7 @@ dataService.setData = function (key, values) {
 }
 
 dataService.getData = function (key) {
+  debugger
   return Cookie.get(key)
 }
 
@@ -21,6 +22,7 @@ dataService.setToken = function (token) {
 }
 
 dataService.getToken = function () {
+  debugger
   // return sessionStorage.getItem(TokenKey);
   return this.getData(TOKEN_KEY)
 }

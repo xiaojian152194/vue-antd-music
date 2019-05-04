@@ -30,15 +30,16 @@ export default {
   },
   methods: {
     initializeFetch () {
+      this.$store.dispatch('music_login_store/GET_USER_LOGIN')
       this.$store.dispatch('music_list_store/FETCH_MUSIC_LIST')
     },
     onSearch (value) {
       this.$router.push({path: '/music/musicSearch', query: {keyWorlds: value}})
     }
   },
-  mounted () {
-    this.initializeFetch()
-  },
+  // mounted () {
+  //   this.initializeFetch()
+  // },
   activated () {
     this.initializeFetch()
   }

@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     isMobile: false,
-    theme: 'dark',
+    theme: 'light',
     layout: 'side',
     systemName: 'P Cloud Music',
     copyright: '123',

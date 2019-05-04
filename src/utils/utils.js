@@ -1,8 +1,9 @@
 import moment from 'moment'
 
 let util = {}
-util.musicTimeFormat = function (h, msd) {
+util.musicTimeFormat = function (msd) {
   // let musicDt = msd.row[msd.column.dataIndex]
+  debugger
   let time = parseFloat(msd) / 1000
   if (time != null) {
     if (time > 60 && time < 60 * 60) {
@@ -17,6 +18,14 @@ util.musicTimeFormat = function (h, msd) {
     }
   }
   return time
+}
+util.longTimestampToString = function (longTimestamp) {
+  if (longTimestamp && longTimestamp > 0) {
+    let time = moment(longTimestamp).format('YYYY-MM-DD HH:mm:ss')
+    return time
+    // return moment(longTimestamp).format('YYYY-MM-DD HH:mm:ss');
+  }
+  return ''
 }
 
 util.yyyyMMddNow = function () {

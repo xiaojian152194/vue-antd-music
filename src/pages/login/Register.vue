@@ -15,9 +15,17 @@
               <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
               <a-form-item
                 fieldDecoratorId="name"
-                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入用户名', whitespace: true}]}"
+                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入账号', whitespace: true}]}"
               >
-                <a-input size="large" placeholder="用户名" >
+                <a-input size="large" placeholder="账号" >
+                  <a-icon slot="prefix" type="user" />
+                </a-input>
+              </a-form-item>
+              <a-form-item
+                fieldDecoratorId="nickname"
+                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入昵称', whitespace: true}]}"
+              >
+                <a-input size="large" placeholder="昵称" >
                   <a-icon slot="prefix" type="user" />
                 </a-input>
               </a-form-item>
@@ -107,18 +115,19 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.logging = true
-          this.$axios.post('fg/register', {
+          this.$axios.post('fg/user/register', {
             username: this.form.getFieldValue('name'),
+            nickname: this.form.getFieldValue('nickname'),
             password: this.form.getFieldValue('password')
           }).then((res) => {
-            debugger
+            // debugger
             this.logging = false
             const result = res.data
-            if (result.id !== null) {
+            if (result.code === 200) {
               this.$message.success('注册成功!')
               this.$router.push('/login')
             } else {
-              this.error = result.message
+              this.$message.warning(result.message)
             }
           })
           this.logging = false

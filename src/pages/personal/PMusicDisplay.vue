@@ -1,11 +1,17 @@
 <template>
   <div>
     <a-table border :columns="getColumns()" :dataSource="musicList" ellipsis>
-      <router-link slot="play" slot-scope="text" :to="{path:'/music/musicPlay', query:{music_id: text}}">
+      <router-link slot="play" slot-scope="text" :to="{path:'/personal/myMusicPlay', query:{music_id: text}}">
         <a-icon type="play-circle" style="margin-left: 7px"/>
       </router-link>
-      <a slot="download" slot-scope="text" :href="'https://music.163.com/song/media/outer/url?id=' + text + '.mp3'">
+      <!--<router-link slot="download" slot-scope="text" :to="'../fg/music/download/' + text">-->
+        <!--<a-icon type="download" style="margin-left: 7px"/>-->
+      <!--</router-link>-->
+      <a slot="download" slot-scope="text" @click="downloadMusic(text)">
         <a-icon type="download" style="margin-left: 7px"/>
+      </a>
+      <a slot="delete" slot-scope="text" @click="deleteMusic(text)">
+        <a-icon type="delete" style="margin-left: 7px"/>
       </a>
     </a-table>
   </div>
@@ -14,7 +20,7 @@
 <script>
 import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
-  name: 'MusicListTable',
+  name: 'MyMusicListTable',
   props: {
     'musicList': {
       default: function () {
@@ -47,11 +53,10 @@ export default {
         //   }
         // },
         {title: '播放', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'name', sortable: 'true'},
-        {title: '专辑', dataIndex: 'alia[0]', minWidth: '60%', sortable: 'true'},
-        {title: '歌手', dataIndex: 'ar[0].name', sortable: 'true'},
-        {title: '时长', dataIndex: 'dt', sortable: 'true', customRender: this.musicTimeFormatRender},
-        {title: '下载', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'download'}}
+        {title: '标题', dataIndex: 'musicName', minWidth: '70%', sortable: 'true'},
+        {title: '大小', dataIndex: 'musicSize', sortable: 'true'},
+        {title: '下载', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'download'}},
+        {title: '删除', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'delete'}}
       ]
     }
   },
@@ -60,14 +65,17 @@ export default {
       return this.musicListColumns.filter((column) => {
         return this.executionColumns.indexOf(column.dataIndex) === -1
       })
+    },
+    downloadMusic (id) {
+      window.location.href = `http://localhost:9090/fg/music/download/${id}`
+    },
+    deleteMusic (id) {
+      debugger
+      let music = {
+        id: id
+      }
+      this.$store.dispatch('my_music_store/DELETE_MUSIC', music)
     }
-    // downloadMusic (id) {
-    //   window.open(`https://music.163.com/song/media/outer/url?id=${id}`)
-    //   var $form = $('<form method="GET"></form>')
-    //   $form.attr('action', '/download/papers/1')
-    //   $form.appendTo($('body'))
-    //   $form.submit()
-    // }
   }
 }
 
