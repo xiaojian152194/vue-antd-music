@@ -8,44 +8,50 @@
       <!--<a-icon type="download" style="margin-left: 7px"/>-->
       <!--</router-link>-->
       <a slot="update" slot-scope="text" @click="showModal(text)">
-        <a-button type="primary">修改</a-button>
+        <a-button type="primary">编辑</a-button>
       </a>
-      <a slot="delete" slot-scope="text" @click="deleteUser(text)">
+      <!--<a slot="delete" slot-scope="text" @click="deleteUser(text)">-->
+        <!--<a-button type="danger">删除</a-button>-->
+      <!--</a>-->
+      <a-popconfirm slot="delete" slot-scope="text" placement="top" okText="确认" cancelText="取消" @confirm="deleteUser(text)">
+        <template slot="title">
+          <p>确认删除此用户？</p>
+        </template>
         <a-button type="danger">删除</a-button>
-      </a>
+      </a-popconfirm>
     </a-table>
     <a-modal width="700px" :scrollable="true" :styles="{top: '60px', height:'500px'}"
-             title="增加用户"
+             title="编辑用户"
              v-model="createUserUpdateModal"
     >
       <div :style="{textAlign: 'center'}">
-        <a-form :autoFormCreate="(updatefrom) => this.form = updatefrom" :model="userUpdateInformation">
+        <a-form :autoFormCreate="(updatefrom) => this.form = updatefrom" >
           <a-row>
             <a-col>
-              <a-form-item label="账号：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+              <a-form-item label="账号：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="username"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '账号不能为空', whitespace: true}]}" >
-                <a-input v-model="userUpdateInformation.username" placeholder="请输入账号" :maxlength=175 />
+                <a-input placeholder="请输入账号" :maxlength=175 />
 
               </a-form-item>
             </a-col>
             <a-col>
-              <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+              <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="nickname"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '昵称不能为空', whitespace: true}]}" >
-                <a-input v-model="userUpdateInformation.nickname" placeholder="请输入昵称" :maxlength=175 />
+                <a-input placeholder="请输入昵称" :maxlength=175 />
 
               </a-form-item>
             </a-col>
             <a-col>
-              <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+              <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="password"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '密码不能为空', whitespace: true}]}" >
-                <a-input v-model="userUpdateInformation.password" type="password" placeholder="请输入密码" :maxlength=36 />
+                <a-input type="password" placeholder="请输入密码" :maxlength=36 />
 
               </a-form-item>
             </a-col>
             <a-col>
-              <a-form-item label="是否管理员：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+              <a-form-item label="是否管理员：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="haveAuthority"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '是否管理员不能为空', whitespace: true}]}" >
-                <a-select v-model="userUpdateInformation.haveAuthority" placeholder="请选择是否管理员">
+                <a-select placeholder="请选择是否管理员">
                   <a-select-option value="Y">管理员</a-select-option>
                   <a-select-option value="N">普通用户</a-select-option>
                 </a-select>
@@ -112,7 +118,7 @@ export default {
         {title: '昵称', dataIndex: 'nickname', sortable: 'true'},
         {title: '是否管理员', dataIndex: 'haveAuthority', sortable: 'true', customRender: this.haveAuthorityRender},
         {title: '创建时间', dataIndex: 'createDate', sortable: 'true', customRender: this.longTimestampRender},
-        {title: '修改', dataIndex: 'id', width: '10px', sortable: 'true', scopedSlots: {customRender: 'update'}},
+        {title: '编辑', dataIndex: 'id', width: '10px', sortable: 'true', scopedSlots: {customRender: 'update'}},
         {title: '删除', dataIndex: 'id', width: '10px', sortable: 'true', scopedSlots: {customRender: 'delete'}}
       ]
     }
@@ -133,7 +139,11 @@ export default {
         if (!err) {
           debugger
           let formDate = {
-            ...this.userUpdateInformation
+            id: this.userUpdateInformation.id,
+            username: this.form.getFieldValue('username'),
+            nickname: this.form.getFieldValue('nickname'),
+            password: this.form.getFieldValue('password'),
+            haveAuthority: this.form.getFieldValue('haveAuthority')
           }
           this.$store.dispatch('user_store/UPDATE_USER', formDate)
           this.createUserUpdateModal = false
@@ -143,9 +153,16 @@ export default {
       })
     },
     showModal (id) {
+      debugger
       this.createUserUpdateModal = true
       this.$store.dispatch('user_store/FETCH_USER', id)
       this.userUpdateInformation.id = id
+      this.form.setFieldsValue({
+        username: null,
+        nickname: null,
+        password: null,
+        haveAuthority: null
+      })
     },
     closeModal () {
       this.createUserUpdateModal = false

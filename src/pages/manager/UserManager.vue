@@ -13,33 +13,33 @@
         v-model="createUserAddModal"
       >
         <div :style="{textAlign: 'center'}">
-          <a-form :autoFormCreate="(from) => this.form = from" :model="userInformation">
+          <a-form :autoFormCreate="(from) => {this.form = from}">
             <a-row>
               <a-col>
-                <a-form-item label="账号：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+                <a-form-item label="账号：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="username"
                              :fieldDecoratorOptions="{rules: [{ required: true, message: '账号不能为空', whitespace: true}]}" >
-                  <a-input v-model="userInformation.username" placeholder="请输入账号" :maxlength=175 />
+                  <a-input placeholder="请输入账号" :maxlength=175 />
 
                 </a-form-item>
               </a-col>
               <a-col>
-                <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+                <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="nickname"
                              :fieldDecoratorOptions="{rules: [{ required: true, message: '昵称不能为空', whitespace: true}]}" >
-                  <a-input v-model="userInformation.nickname" placeholder="请输入昵称" :maxlength=175 />
+                  <a-input placeholder="请输入昵称" :maxlength=175 />
 
                 </a-form-item>
               </a-col>
               <a-col>
-                <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+                <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="password"
                              :fieldDecoratorOptions="{rules: [{ required: true, message: '密码不能为空', whitespace: true}]}" >
-                  <a-input v-model="userInformation.password" type="password" placeholder="请输入密码" :maxlength=36 />
+                  <a-input type="password" placeholder="请输入密码" :maxlength=36 />
 
                 </a-form-item>
               </a-col>
               <a-col>
-                <a-form-item label="是否管理员：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+                <a-form-item label="是否管理员：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="haveAuthority"
                              :fieldDecoratorOptions="{rules: [{ required: true, message: '是否管理员不能为空', whitespace: true}]}" >
-                  <a-select v-model="userInformation.haveAuthority" placeholder="请选择是否管理员">
+                  <a-select placeholder="请选择是否管理员">
                     <a-select-option value="Y">管理员</a-select-option>
                     <a-select-option value="N">普通用户</a-select-option>
                   </a-select>
@@ -74,14 +74,7 @@ export default {
   components: {AButton, ASelect, ACol, ARow, AInput, AFormItem, UserDisplay},
   data () {
     return {
-      createUserAddModal: false,
-
-      userInformation: {
-        username: null,
-        nickname: null,
-        password: null,
-        haveAuthority: null
-      }
+      createUserAddModal: false
     }
   },
   computed: {
@@ -102,7 +95,7 @@ export default {
   },
   methods: {
     initializeFetch () {
-      // this.$store.dispatch('music_login_store/GET_USER_LOGIN')
+      this.$store.dispatch('music_login_store/GET_USER_LOGIN')
       this.$store.dispatch('user_store/FETCH_All_USER')
     },
     onSearch (value) {
@@ -113,18 +106,28 @@ export default {
     },
     showModal () {
       this.createUserAddModal = true
-      this.userInformation.haveAuthority = null
-      this.userInformation.username = null
-      this.userInformation.nickname = null
-      this.userInformation.password = null
+      this.form.setFieldsValue({
+        username: null,
+        nickname: null,
+        password: null,
+        haveAuthority: null
+      })
     },
     closeModal () {
       this.createUserAddModal = false
     },
-    handleOk () {
+    handleOk (e) {
+      e.preventDefault()
+      debugger
       this.form.validateFields((err, values) => {
         if (!err) {
-          let context = this.userInformation
+          debugger
+          let context = {
+            username: this.form.getFieldValue('username'),
+            nickname: this.form.getFieldValue('nickname'),
+            password: this.form.getFieldValue('password'),
+            haveAuthority: this.form.getFieldValue('haveAuthority')
+          }
           this.$store.dispatch('user_store/SAVE_USER', context)
           this.createUserAddModal = false
         } else {

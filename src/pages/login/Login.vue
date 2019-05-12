@@ -15,17 +15,17 @@
               <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
               <a-form-item
                 fieldDecoratorId="name"
-                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入用户名', whitespace: true}]}"
+                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入账户', whitespace: true}]}"
               >
-                <a-input size="large" placeholder="用户名" >
-                  <a-icon slot="prefix" type="user" />
+                <a-input size="large" placeholder="请输入账户" >
+                  <a-icon slot="prefix" type="mail" />
                 </a-input>
               </a-form-item>
               <a-form-item
                 fieldDecoratorId="password"
                 :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入密码', whitespace: true}]}"
               >
-                <a-input size="large" placeholder="密码" type="password">
+                <a-input size="large" placeholder="请输入密码" type="password">
                   <a-icon slot="prefix" type="lock" />
                 </a-input>
               </a-form-item>

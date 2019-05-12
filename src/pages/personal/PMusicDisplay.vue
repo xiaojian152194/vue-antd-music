@@ -10,9 +10,15 @@
       <a slot="download" slot-scope="text" @click="downloadMusic(text)">
         <a-icon type="download" style="margin-left: 7px"/>
       </a>
-      <a slot="delete" slot-scope="text" @click="deleteMusic(text)">
+      <!--<a slot="delete" slot-scope="text" @click="deleteMusic(text)">-->
+
+      <!--</a>-->
+      <a-popconfirm slot="delete" slot-scope="text" placement="top" okText="确认" cancelText="取消" @confirm="deleteMusic(text)">
+        <template slot="title">
+          <p>确认删除此音乐？</p>
+        </template>
         <a-icon type="delete" style="margin-left: 7px"/>
-      </a>
+      </a-popconfirm>
     </a-table>
   </div>
 </template>
