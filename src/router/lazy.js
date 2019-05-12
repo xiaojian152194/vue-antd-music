@@ -80,34 +80,59 @@ export const staticRouters = [
         ]
       },
       {
-        path: '/personal',
-        name: '个人中心',
-        component: RouteView,
-        icon: 'home',
-        children: [
-          {
-            path: '/personal/pmusic',
-            name: '个人音乐',
-            component: () => import('@/pages/personal/PMusic'),
-            icon: 'heart'
-            // meta: { requireAuth: true }
-          },
-          {
-            path: '/personal/user',
-            name: '用户管理',
-            component: () => import('@/pages/manager/UserManager'),
-            icon: 'user',
-            meta: { role: ['admin'], requireAuth: true }
-          },
-          {
-            path: '/personal/music',
-            name: '音乐管理',
-            component: () => import('@/pages/manager/MusicManager'),
-            icon: 'database',
-            meta: { role: ['admin'], requireAuth: true }
-          }
-        ]
+        path: '/personal/pmusic',
+        name: '个人音乐',
+        component: () => import('@/pages/personal/PMusic'),
+        icon: 'heart'
+        // meta: { requireAuth: true }
       },
+      {
+        path: '/personal/user',
+        name: '用户管理',
+        component: () => import('@/pages/manager/UserManager'),
+        icon: 'user',
+        meta: { role: ['admin'], requireAuth: true },
+        invisible: true
+      },
+      {
+        path: '/personal/music',
+        name: '音乐管理',
+        component: () => import('@/pages/manager/MusicManager'),
+        icon: 'database',
+        meta: { role: ['admin'], requireAuth: true },
+        invisible: true
+      },
+      // {
+      //   path: '/personal',
+      //   name: '个人中心',
+      //   component: RouteView,
+      //   icon: 'home',
+      //   children: [
+      //     {
+      //       path: '/personal/pmusic',
+      //       name: '个人音乐',
+      //       component: () => import('@/pages/personal/PMusic'),
+      //       icon: 'heart'
+      //       // meta: { requireAuth: true }
+      //     },
+      //     {
+      //       path: '/personal/user',
+      //       name: '用户管理',
+      //       component: () => import('@/pages/manager/UserManager'),
+      //       icon: 'user',
+      //       meta: { role: ['admin'], requireAuth: true },
+      //       invisible: true
+      //     },
+      //     {
+      //       path: '/personal/music',
+      //       name: '音乐管理',
+      //       component: () => import('@/pages/manager/MusicManager'),
+      //       icon: 'database',
+      //       meta: { role: ['admin'], requireAuth: true },
+      //       invisible: true
+      //     }
+      //   ]
+      // },
       {
         path: '/exception/403',
         name: '尚未登陆',

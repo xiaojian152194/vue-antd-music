@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     initializeFetch () {
-      // this.$store.dispatch('music_login_store/GET_USER_LOGIN')
+      this.$store.dispatch('music_login_store/GET_USER_LOGIN')
       this.$store.dispatch('my_music_store/FETCH_All_MUSIC')
     },
     onSearch (value) {

@@ -10,9 +10,12 @@
       <a slot="download" slot-scope="text" @click="downloadMusic(text)">
         <a-icon type="download" style="margin-left: 7px"/>
       </a>
-      <a slot="delete" slot-scope="text" @click="deleteMusic(text)">
+      <a-popconfirm slot="delete" slot-scope="text" placement="top" okText="确认" cancelText="取消" @confirm="deleteMusic(text)">
+        <template slot="title">
+          <p>确认删除此音乐？</p>
+        </template>
         <a-icon type="delete" style="margin-left: 7px"/>
-      </a>
+      </a-popconfirm>
     </a-table>
   </div>
 </template>
@@ -53,7 +56,7 @@ export default {
         //   }
         // },
         {title: '播放', dataIndex: 'id', sortable: 'true', scopedSlots: {customRender: 'play'}},
-        {title: '标题', dataIndex: 'musicName', minWidth: '45%', sortable: 'true'},
+        {title: '标题', dataIndex: 'musicName', minWidth: '25%', sortable: 'true'},
         {title: '大小', dataIndex: 'musicSize', sortable: 'true'},
         {title: '上传账户', dataIndex: 'userUsername', sortable: 'true'},
         {title: '上传时间', dataIndex: 'uploadTime', sortable: 'true', customRender: this.longTimestampRender},

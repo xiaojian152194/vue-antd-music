@@ -25,13 +25,16 @@
                     ],
                 }"
           >
-            <a-input size="large" placeholder="邮箱" />
+            <a-input size="large" placeholder="邮箱">
+              <a-icon slot="prefix" type="mail" />
+            </a-input>
           </a-form-item>
           <a-form-item
           fieldDecoratorId="nickname"
           :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入昵称', whitespace: true}]}"
           >
           <a-input size="large" placeholder="昵称" >
+            <a-icon slot="prefix" type="user" />
           </a-input>
           </a-form-item>
           <a-popover :overlayStyle="{ width: 240 }" placement="right" :visible="visible">
@@ -73,7 +76,9 @@
                         ],
                     }"
             >
-              <a-input size="large" type="password" placeholder="至少6位密码，区分大小写" />
+              <a-input size="large" type="password" placeholder="至少6位密码，区分大小写" >
+                <a-icon slot="prefix" type="key" />
+              </a-input>
             </a-form-item>
           </a-popover>
           <a-form-item
@@ -90,7 +95,9 @@
                     ],
                 }"
           >
-            <a-input size="large" type="password" placeholder="确认密码" />
+            <a-input size="large" type="password" placeholder="确认密码" >
+              <a-icon slot="prefix" type="key" />
+            </a-input>
           </a-form-item>
           <a-form-item>
             <a-button
@@ -225,6 +232,7 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
+        debugger
         if (!err) {
           this.logging = true
           this.$axios.post('fg/user/register', {
