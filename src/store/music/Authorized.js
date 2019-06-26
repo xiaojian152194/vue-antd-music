@@ -132,7 +132,6 @@ const Authorized = {
     REGISTER: ({dispatch, commit, state, rootState, rootGetters}, context) => {
       commit('GET_USER_LOGIN_STATE', {state: 'start'})
       LoginService.register(context).then(function (response) {
-        debugger
         if (response.data.successResponse === true) {
           commit('REGISTER_STATE', {state: 'success', ...response.data})
         } else {
