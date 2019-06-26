@@ -2,7 +2,7 @@
 <template>
   <div>
     <a-card>
-      <a-upload-dragger v-if="userState.username" name="music" :multiple="true" action="http://localhost:9090/fg/music/upload" @change="handleChange" >
+      <a-upload-dragger v-if="userState.username" accept=".mp3" name="music" :multiple="true" action="http://localhost:9090/fg/music/upload" @change="handleChange" >
         <p class="ant-upload-drag-icon">
           <a-icon type="inbox" />
         </p>
@@ -58,7 +58,7 @@ export default {
         console.log(info.file, info.fileList)
       }
       if (status === 'done') {
-        debugger
+        // debugger
         this.$message.success(`${info.file.name} 音乐上传成功.`)
         let formDate = {
           userId: this.userState.id

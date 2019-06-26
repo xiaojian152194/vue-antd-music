@@ -76,7 +76,7 @@ export default {
       window.location.href = `http://localhost:9090/fg/music/download/${id}`
     },
     deleteMusic (id) {
-      debugger
+      // debugger
       let music = {
         id: id
       }

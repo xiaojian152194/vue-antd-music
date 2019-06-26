@@ -232,7 +232,7 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
-        debugger
+        // debugger
         if (!err) {
           this.logging = true
           this.$axios.post('fg/user/register', {

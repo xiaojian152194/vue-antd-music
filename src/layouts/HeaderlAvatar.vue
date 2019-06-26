@@ -2,11 +2,11 @@
   <div>
   <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial" >
     <span style="cursor: pointer" v-if="auth.token">
-      <a-avatar class="avatar" size="small" shape="circle" :src="currUser.avatar"/>
+      <a-avatar class="avatar" size="small" shape="circle" />
       <span>{{currUser.nickname}}</span>
     </span>
     <span style="cursor: pointer" v-else>
-      <a-avatar class="avatar" size="small" shape="circle" :src="currUser.avatar"/>
+      <a-avatar class="avatar" size="small" shape="circle" />
       <span>用户名</span>
     </span>
     <a-menu style="width: 150px" slot="overlay" :style="{textAlign: 'center'}" v-if="auth.token && auth.roles === 'user'">
@@ -99,16 +99,16 @@
       <a-form :autoFormCreate="(from) => this.form = from" :model="changeUserPassword">
         <a-row>
           <a-col>
-            <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="nickname"
+            <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="username"
                          :fieldDecoratorOptions="{rules: [{ required: true, message: '昵称不能为空', whitespace: true}]}" >
-              <a-input placeholder="请输入昵称" :maxlength=175 />
+              <a-input placeholder="请输入昵称" v-model="changeUserPassword.nickname" :maxlength=175 />
 
             </a-form-item>
           </a-col>
           <a-col>
             <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="password"
                          :fieldDecoratorOptions="{rules: [{ required: true, message: '密码不能为空', whitespace: true}]}" >
-              <a-input type="password" placeholder="请输入密码" :maxlength=36 />
+              <a-input type="password" placeholder="请输入密码" v-model="changeUserPassword.password" :maxlength=36 />
 
             </a-form-item>
           </a-col>
@@ -134,6 +134,7 @@ export default {
       changePasswordModal: false,
       changeUserPassword: {
         id: null,
+        nickname: null,
         username: null,
         password: null,
         haveAuthority: null
@@ -175,16 +176,16 @@ export default {
     handleOk () {
       this.form.validateFields((err, values) => {
         if (!err) {
-          debugger
-          let formDate = {
-            id: this.changeUserPassword.id,
-            username: this.changeUserPassword.username,
-            haveAuthority: this.changeUserPassword.haveAuthority,
-            nickname: this.form.getFieldValue('nickname'),
-            password: this.form.getFieldValue('password')
-          }
-          this.$store.dispatch('user_store/UPDATE_USER', formDate)
+          // let formDate = {
+          //   id: this.changeUserPassword.id,
+          //   username: this.changeUserPassword.username,
+          //   haveAuthority: this.changeUserPassword.haveAuthority,
+          //   nickname: this.changeUserPassword.nickname,
+          //   password: this.changeUserPassword.password
+          // }
+          this.$store.dispatch('user_store/UPDATE_USER', this.changeUserPassword)
           this.changePasswordModal = false
+          this.$message.success('用户修改成功')
         } else {
           this.changePasswordModal = true
         }

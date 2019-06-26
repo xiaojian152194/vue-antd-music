@@ -25,33 +25,33 @@
              v-model="createUserUpdateModal"
     >
       <div :style="{textAlign: 'center'}">
-        <a-form :autoFormCreate="(updatefrom) => this.form = updatefrom" >
+        <a-form :autoFormCreate="(updatefrom) => this.form = updatefrom" :model="userUpdateInformation">
           <a-row>
             <a-col>
               <a-form-item label="账号：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="username"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '账号不能为空', whitespace: true}]}" >
-                <a-input placeholder="请输入账号" :maxlength=175 />
+                <a-input placeholder="请输入账号" v-model="userUpdateInformation.username" :maxlength=175 />
 
               </a-form-item>
             </a-col>
             <a-col>
               <a-form-item label="昵称：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="nickname"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '昵称不能为空', whitespace: true}]}" >
-                <a-input placeholder="请输入昵称" :maxlength=175 />
+                <a-input placeholder="请输入昵称" v-model="userUpdateInformation.nickname" :maxlength=175 />
 
               </a-form-item>
             </a-col>
             <a-col>
               <a-form-item label="密码：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="password"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '密码不能为空', whitespace: true}]}" >
-                <a-input type="password" placeholder="请输入密码" :maxlength=36 />
+                <a-input type="password" placeholder="请输入密码" v-model="userUpdateInformation.password" :maxlength=36 />
 
               </a-form-item>
             </a-col>
             <a-col>
               <a-form-item label="是否管理员：" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" fieldDecoratorId="haveAuthority"
                            :fieldDecoratorOptions="{rules: [{ required: true, message: '是否管理员不能为空', whitespace: true}]}" >
-                <a-select placeholder="请选择是否管理员">
+                <a-select placeholder="请选择是否管理员" v-model="userUpdateInformation.haveAuthority">
                   <a-select-option value="Y">管理员</a-select-option>
                   <a-select-option value="N">普通用户</a-select-option>
                 </a-select>
@@ -97,6 +97,7 @@ export default {
       userUpdateInformation: {
         id: null,
         username: null,
+        nickname: null,
         password: null,
         haveAuthority: null
       },
@@ -137,15 +138,16 @@ export default {
     handleOk () {
       this.form.validateFields((err, values) => {
         if (!err) {
-          debugger
-          let formDate = {
-            id: this.userUpdateInformation.id,
-            username: this.form.getFieldValue('username'),
-            nickname: this.form.getFieldValue('nickname'),
-            password: this.form.getFieldValue('password'),
-            haveAuthority: this.form.getFieldValue('haveAuthority')
-          }
-          this.$store.dispatch('user_store/UPDATE_USER', formDate)
+          // debugger
+          // let formDate = {
+          //   id: this.userUpdateInformation.id,
+          //   username: this.form.getFieldValue('username'),
+          //   nickname: this.form.getFieldValue('nickname'),
+          //   password: this.form.getFieldValue('password'),
+          //   haveAuthority: this.form.getFieldValue('haveAuthority')
+          // }
+          this.$store.dispatch('user_store/UPDATE_USER', this.userUpdateInformation)
+          this.form.resetFields()
           this.createUserUpdateModal = false
         } else {
           this.createUserUpdateModal = true
@@ -153,16 +155,15 @@ export default {
       })
     },
     showModal (id) {
-      debugger
       this.createUserUpdateModal = true
       this.$store.dispatch('user_store/FETCH_USER', id)
       this.userUpdateInformation.id = id
-      this.form.setFieldsValue({
-        username: null,
-        nickname: null,
-        password: null,
-        haveAuthority: null
-      })
+      // this.form.setFieldsValue({
+      //   username: null,
+      //   nickname: null,
+      //   password: null,
+      //   haveAuthority: null
+      // })
     },
     closeModal () {
       this.createUserUpdateModal = false

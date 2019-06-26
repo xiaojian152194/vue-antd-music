@@ -23,7 +23,6 @@ Vue.component('icon', Icon)
 Vue.mixin({
   methods: {
     musicTimeFormatRender: function (musicDt) {
-      debugger
       return util.musicTimeFormat(musicDt)
     },
     longTimestampRender: function (time) {

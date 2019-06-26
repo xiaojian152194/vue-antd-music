@@ -8,7 +8,7 @@ dataService.setData = function (key, values) {
 }
 
 dataService.getData = function (key) {
-  debugger
+  // debugger
   return Cookie.get(key)
 }
 
@@ -22,7 +22,7 @@ dataService.setToken = function (token) {
 }
 
 dataService.getToken = function () {
-  debugger
+  // debugger
   // return sessionStorage.getItem(TokenKey);
   return this.getData(TOKEN_KEY)
 }

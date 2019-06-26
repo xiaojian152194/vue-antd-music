@@ -39,7 +39,7 @@ export default {
       let musicSearch = {
         likeMusicName: value
       }
-      debugger
+      // debugger
       this.$store.dispatch('my_music_store/SEARCH_MUSIC', musicSearch)
       // this.$router.push({path: '/music/musicSearch', query: {keyWorlds: value}})
     }

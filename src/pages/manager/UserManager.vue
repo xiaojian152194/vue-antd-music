@@ -118,10 +118,10 @@ export default {
     },
     handleOk (e) {
       e.preventDefault()
-      debugger
+      // debugger
       this.form.validateFields((err, values) => {
         if (!err) {
-          debugger
+          // debugger
           let context = {
             username: this.form.getFieldValue('username'),
             nickname: this.form.getFieldValue('nickname'),
